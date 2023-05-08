@@ -15,16 +15,8 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
-import {Input, Button} from 'native-base';
 import {moderateScale} from 'react-native-size-matters';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import backImg from '../../../assets/images/png/backImg3.png';
-import logo from '../../../assets/images/png/logo.png';
 import LinearGradient from 'react-native-linear-gradient';
-import Header from '../../../Components/header';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
-import Icon2 from 'react-native-vector-icons/Fontisto';
 import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import HomeImg from '../../../assets/images/png/homeImg.png';

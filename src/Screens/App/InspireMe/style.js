@@ -32,76 +32,9 @@ const styles = StyleSheet.create({
     fontFamily: MonteseratBold,
   },
 
-  btnText: {
-    fontSize: moderateScale(9, 0.1),
-    lineHeight: moderateScale(14, 0.1),
-    fontFamily: MonteseratLight,
-    marginBottom: moderateScale(10, 0.1),
-  },
-  btnText1: {
-    fontSize: moderateScale(14, 0.1),
-    lineHeight: moderateScale(18, 0.1),
-    fontFamily: MonteseratLight,
-  },
-  backImg: {
+  backgroundVideo: {
     width: '100%',
-    height: moderateScale(150, 0.1),
-    borderRadius: moderateScale(10, 0.1),
-  },
-
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginVertical: moderateScale(10, 0.1),
-  },
-  item: {
-    width: '30%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: moderateScale(5, 0.1),
-    marginVertical: moderateScale(10, 0.1),
-    height: moderateScale(80),
-    borderRadius: moderateScale(10, 0.1),
-  },
-  buttonText: {
-    height: '93%',
-    width: '95%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: moderateScale(10, 0.1),
-  },
-  graphView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: moderateScale(100, 0.1),
-    // width: '95%',
-  },
-  graph: {
-    width: '100%',
-    height: moderateScale(235, 0.1),
-  },
-  dartView: {
-    backgroundColor: '#fff',
-    width: moderateScale(40, 0.1),
-    height: moderateScale(40, 0.1),
-
-    borderRadius: moderateScale(40 / 2, 0.1),
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    right: moderateScale(10, 0.1),
-    top: moderateScale(10, 0.1),
-  },
-  dart: {
-    width: moderateScale(20, 0.1),
-    height: moderateScale(20, 0.1),
-  },
-  dartText: {
-    // marginTop: moderateScale(, 0.1),
-    fontSize: moderateScale(6, 0.1),
-    color: '#000',
-    fontFamily: MonteseratBold,
+    height: moderateScale(300, 0.1),
   },
 });
 
