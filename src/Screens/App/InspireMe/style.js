@@ -17,12 +17,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(15, 0.1),
   },
   heading: {
-    width: 0.5 * width,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
-    borderBottomWidth: moderateScale(1, 0.1),
-    paddingBottom: moderateScale(10, 0.1),
-    marginBottom: moderateScale(10, 0.1),
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    marginVertical: moderateScale(10, 0.1),
   },
   headingText: {
     fontSize: moderateScale(18, 0.1),

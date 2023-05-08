@@ -93,12 +93,8 @@ const InspireMe = ({navigation}) => {
         <View style={{marginBottom: moderateScale(15, 0.1)}}>
           <HeaderTabs navigation={navigation} />
         </View>
-        <View>
-          <Image source={HomeImg} resizeMode="cover" style={s.backImg} />
-          <TouchableOpacity style={s.dartView}>
-            <Image source={Dart} resizeMode="cover" style={s.dart} />
-            <Text style={[s.dartText]}>My why</Text>
-          </TouchableOpacity>
+        <View style={[s.heading]}>
+          <Text style={[s.headingText1, {color: textColor}]}>Inspire Me</Text>
         </View>
         <View style={s.container}>
           {Data.map((item, index) => (

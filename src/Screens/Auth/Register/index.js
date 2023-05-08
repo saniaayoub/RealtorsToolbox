@@ -223,7 +223,7 @@ const Register = ({navigation}) => {
                     <Icon2 name="locked" color={Textcolor} size={18} />
                   </View>
                 }
-                placeholder="New Password"
+                placeholder="Password"
                 placeholderTextColor={Textcolor}
                 value={password}
                 onChangeText={password => {
