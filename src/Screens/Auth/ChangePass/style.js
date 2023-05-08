@@ -14,12 +14,16 @@ const styles = StyleSheet.create({
     height: height,
     paddingHorizontal: moderateScale(15, 0.1),
   },
+
   blurContainer: {
-    marginTop: moderateScale(-10, 0.1),
+    // width: 0.8 * width,
+    // height: 0.3 * height,
+    marginTop: moderateScale(50, 0.1),
     backgroundColor: 'rgba(0,0,0,0.5)',
     borderColor: 'grey',
     borderWidth: moderateScale(1, 0.1),
     borderRadius: moderateScale(25, 0.1),
+    // paddingLeft: moderateScale(15, 0.1),
   },
   inputView: {
     justifyContent: 'center',
@@ -46,19 +50,16 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: moderateScale(20, 0.1),
   },
-  inputContainerStyle: {
-    width: '84%',
-    paddingVertical: moderateScale(10, 0.1),
-    borderBottomColor: '#fff',
-    borderBottomWidth: 1,
-  },
   inputText: {
     color: '#fff',
     fontSize: moderateScale(14, 0.1),
     fontFamily: MonteseratLight,
   },
   iconCircle: {
+    // padding: moderateScale(7, 0.1),
     marginRight: moderateScale(15, 0.1),
+    // marginLeft: moderateScale(5, 0.1),
+    // marginBottom: moderateScale(5, 0.1),
   },
   heading1: {
     fontFamily: MonteseratBold,
@@ -69,8 +70,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(11, 0.1),
   },
   btn: {
-    marginTop: moderateScale(50, 0.1),
-    marginBottom: moderateScale(30, 0.1),
+    marginVertical: moderateScale(50, 0.1),
     backgroundColor: '#FDBC2C',
     borderRadius: moderateScale(50, 0.1),
     width: moderateScale(145, 0.1),
@@ -79,13 +79,18 @@ const styles = StyleSheet.create({
   },
   btnView: {
     flexDirection: 'row',
-  },
-  radioInput: {
-    marginTop: moderateScale(15, 0.1),
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '75%',
+    justifyContent: 'center',
+  },
+  btnText3: {
+    fontFamily: MonteseratBold,
+  },
+  link: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: moderateScale(70, 0.1),
+    marginBottom: moderateScale(20, 0.1),
   },
 });
 

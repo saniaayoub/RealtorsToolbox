@@ -7,6 +7,8 @@ import StartScreen from '../../../Screens/Auth/Start';
 import Login from '../../../Screens/Auth/Login';
 import Register from '../../../Screens/Auth/Register';
 import ForgetPass from '../../../Screens/Auth/ForgetPass';
+import ChangePass from '../../../Screens/Auth/ChangePass';
+
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
@@ -21,8 +23,8 @@ const AuthStack = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="ForgetPass" component={ForgetPass} />
-      {/* <Stack.Screen name="ChangePass" component={ChangePass} />
-      <Stack.Screen name="Map" component={Map} />
+      <Stack.Screen name="ChangePass" component={ChangePass} />
+      {/* <Stack.Screen name="Map" component={Map} />
       <Stack.Screen name="Map1" component={Map1} /> */}
     </Stack.Navigator>
   );

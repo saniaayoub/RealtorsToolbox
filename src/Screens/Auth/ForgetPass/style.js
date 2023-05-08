@@ -6,29 +6,23 @@ const height = Dimensions.get('window').height;
 
 const MonteseratBold = 'Montserrat-Bold';
 const MonteseratRegular = 'Montserrat-Regular';
-// const MonteseratRegular = 'Montserrat-Regular';
+const MonteseratLight = 'Montserrat-Light';
 
 const styles = StyleSheet.create({
-  sav: {
-    flex: 1,
-    height: '100%',
-  },
   backImg: {
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    height: '100%',
+    flex: 1,
+    height: height,
     paddingHorizontal: moderateScale(15, 0.1),
   },
-
   blurContainer: {
     // width: 0.8 * width,
     // height: 0.3 * height,
+    marginTop: moderateScale(50, 0.1),
     backgroundColor: 'rgba(0,0,0,0.5)',
     borderColor: 'grey',
     borderWidth: moderateScale(1, 0.1),
     borderRadius: moderateScale(25, 0.1),
     // paddingLeft: moderateScale(15, 0.1),
-    justifyContent: 'space-around',
   },
   inputView: {
     justifyContent: 'center',
@@ -58,7 +52,7 @@ const styles = StyleSheet.create({
   inputText: {
     color: '#fff',
     fontSize: moderateScale(14, 0.1),
-    fontFamily: MonteseratRegular,
+    fontFamily: MonteseratLight,
   },
   iconCircle: {
     // padding: moderateScale(7, 0.1),
@@ -75,8 +69,8 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(11, 0.1),
   },
   btn: {
-    marginTop: moderateScale(50, 0.1),
-    backgroundColor: '#FFD700',
+    marginVertical: moderateScale(50, 0.1),
+    backgroundColor: '#FDBC2C',
     borderRadius: moderateScale(50, 0.1),
     width: moderateScale(145, 0.1),
     height: moderateScale(43, 0.1),

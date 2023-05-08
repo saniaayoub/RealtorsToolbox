@@ -9,6 +9,7 @@ import {
   Easing,
   TouchableOpacity,
   Animated,
+  ScrollView,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -42,10 +43,10 @@ const ForgetPass = ({navigation}) => {
   useEffect(() => {}, []);
 
   return (
-    <SafeAreaView style={s.sav}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground source={backImg} style={s.backImg}>
         <View>
-          <Header />
+          <Header navigation={navigation} />
         </View>
 
         <View style={s.blurContainer}>
@@ -55,7 +56,7 @@ const ForgetPass = ({navigation}) => {
             end={{x: 1, y: 0}}> */}
           <View style={s.inputView}>
             <View style={s.headingView}>
-              <Text style={s.heading1}>Sign In</Text>
+              <Text style={s.heading1}>Forget Password</Text>
             </View>
             <View style={s.input}>
               <Input
@@ -96,97 +97,22 @@ const ForgetPass = ({navigation}) => {
                 </View>
               </>
             ) : null}
-            <View style={s.input}>
-              <Input
-                w={{
-                  base: '83%',
-                  md: '25%',
-                }}
-                variant="underlined"
-                InputLeftElement={
-                  <View style={[s.iconCircle, {borderColor: Textcolor}]}>
-                    <Icon2 name="locked" color={Textcolor} size={18} />
-                  </View>
-                }
-                placeholder="Password"
-                placeholderTextColor={Textcolor}
-                value={password}
-                onChangeText={password => {
-                  setPassword(password);
-                }}
-                InputRightElement={
-                  password ? (
-                    <View style={s.eye}>
-                      <TouchableOpacity onPress={() => setshowPass(!showPass)}>
-                        <Feather
-                          name={showPass ? 'eye' : 'eye-off'}
-                          color={Textcolor}
-                          size={20}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  ) : (
-                    <></>
-                  )
-                }
-                style={s.inputText}
-                secureTextEntry={showPass}
-              />
-            </View>
-            {submitted && (password == null || password == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
-                </View>
-              </>
-            ) : null}
 
             <Button
               size="sm"
               onPressIn={async () => {
-                navigation.navigate('ForgetPass');
+                navigation.navigate('ChangePass');
               }}
               variant={'solid'}
               style={s.btn}>
               <View style={s.btnView}>
-                <Text style={s.btnText}>ForgetPass</Text>
+                <Text style={s.btnText}>Send</Text>
               </View>
             </Button>
-
-            <Button
-              size="md"
-              variant={'link'}
-              onPressIn={() => navigation.navigate('ForgetPassword')}>
-              <Text style={[s.btnText, s.btnText2]}>Forgot Password?</Text>
-            </Button>
           </View>
-
-          <Button
-            size="sm"
-            variant={'link'}
-            onPressIn={() => navigation.navigate('Register')}>
-            <View style={s.link}>
-              <Text style={[s.btnText, s.btnText2]}>
-                Don’t Have an Account?
-              </Text>
-              <Text style={[s.btnText, s.btnText2, s.btnText3]}>
-                {' '}
-                Sign up Now!
-              </Text>
-            </View>
-          </Button>
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

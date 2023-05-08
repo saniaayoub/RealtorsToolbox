@@ -9,6 +9,7 @@ import {
   Easing,
   TouchableOpacity,
   Animated,
+  ScrollView,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,12 +19,12 @@ import {moderateScale} from 'react-native-size-matters';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import backImg from '../../../assets/images/png/backImg3.png';
 import logo from '../../../assets/images/png/logo.png';
-// import Icon from 'react-native-vector-icons/AntDesign';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../../../Components/header';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import {setUserToken} from '../../../Redux/actions';
 
 const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passRegex = new RegExp(
@@ -31,6 +32,7 @@ const passRegex = new RegExp(
 );
 
 const ForgetPass = ({navigation}) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [submitted, setSubmitted] = useState();
@@ -42,10 +44,10 @@ const ForgetPass = ({navigation}) => {
   useEffect(() => {}, []);
 
   return (
-    <SafeAreaView style={s.sav}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground source={backImg} style={s.backImg}>
         <View>
-          <Header />
+          <Header navigation={navigation} />
         </View>
 
         <View style={s.blurContainer}>
@@ -153,7 +155,7 @@ const ForgetPass = ({navigation}) => {
             <Button
               size="sm"
               onPressIn={async () => {
-                // navigation.navigate('ForgetPass');
+                dispatch(setUserToken('sania'));
               }}
               variant={'solid'}
               style={s.btn}>
@@ -166,7 +168,9 @@ const ForgetPass = ({navigation}) => {
               size="md"
               variant={'link'}
               onPressIn={() => navigation.navigate('ForgetPass')}>
-              <Text style={[s.btnText, s.btnText2]}>Forgot Password?</Text>
+              <Text style={[s.btnText, s.btnText2, s.btnText3]}>
+                Forgot Password?
+              </Text>
             </Button>
           </View>
 
@@ -186,7 +190,7 @@ const ForgetPass = ({navigation}) => {
           </Button>
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
