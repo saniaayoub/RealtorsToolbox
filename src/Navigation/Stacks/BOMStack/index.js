@@ -1,12 +1,12 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import Home from '../../../Screens/App/Home';
+import BookoftheMonth from '../../../Screens/App/BOM';
 
 const Stack = createStackNavigator();
 
 const BOMStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="BookoftheMonth" component={BookoftheMonth} />
     </Stack.Navigator>
   );
 };

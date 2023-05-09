@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   btnText: {
+    color: '#fff',
     fontSize: moderateScale(12, 0.1),
     lineHeight: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,

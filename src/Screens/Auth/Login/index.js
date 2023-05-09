@@ -123,7 +123,7 @@ const ForgetPass = ({navigation}) => {
                         <Feather
                           name={showPass ? 'eye' : 'eye-off'}
                           color={Textcolor}
-                          size={20}
+                          size={moderateScale(20, 0.1)}
                         />
                       </TouchableOpacity>
                     </View>

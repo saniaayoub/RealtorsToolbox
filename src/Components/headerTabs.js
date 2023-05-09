@@ -33,7 +33,7 @@ const HeaderTabs = props => {
           }}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('server')}>
+      <TouchableOpacity onPress={() => console.log('setting')}>
         <Setting
           name="settings-sharp"
           size={moderateScale(28, 0.1)}

@@ -20,8 +20,11 @@ import {moderateScale} from 'react-native-size-matters';
 import Header from '../../../Components/header';
 import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
-import Icon2 from 'react-native-vector-icons/FontAwesome5';
-
+import Play from 'react-native-vector-icons/FontAwesome5';
+import Heart from 'react-native-vector-icons/MaterialCommunityIcons';
+import Share from 'react-native-vector-icons/FontAwesome';
+import VideoBack from '../../../assets/images/png/videoBack.png';
+import Videomp4 from '../../../assets/video/video.mp4';
 import Video from 'react-native-video';
 
 const InspireMe = ({navigation}) => {
@@ -43,68 +46,94 @@ const InspireMe = ({navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[{backgroundColor: backColor}]}>
-        <View style={{marginBottom: moderateScale(15, 0.1)}}>
+        <View style={s.mB}>
           <HeaderTabs navigation={navigation} />
         </View>
         <View style={[s.heading]}>
           <Text style={[s.headingText1, {color: textColor}]}>Inspire Me</Text>
         </View>
-        <View>
-          <Video
-            source={{
-              uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-            }}
-            paused={!isPlaying}
-            controls={true}
-            style={s.backgroundVideo}
-            muted={isMuted}
-          />
-          <Button
-            size="sm"
-            variant={'link'}
-            onPressIn={() => navigation.navigate('Register')}>
-            {/* <View style={s.link}>
-              <Icon />
-            </View> */}
-          </Button>
-          {/* <Button
-            onPress={() => setIsMuted(m => !m)}
-            title={isMuted ? 'Unmute' : 'Mute'}
-          /> */}
+
+        <View style={s.videos}>
+          {[1, 2, 3].map((item, index) => (
+            <View key={index}>
+              <View style={s.backgroundVideo}>
+                {/* <Video
+                  source={Videomp4}
+                  paused={!isPlaying}
+                  controls={true}
+                  style={s.video}
+                  // style={s.backgroundVideo}
+                  muted={isMuted}
+                /> */}
+                <Image
+                  source={VideoBack}
+                  resizeMode="contain"
+                  style={[s.backgroundVideo, {position: 'absolute'}]}
+                />
+
+                <Button
+                  size="sm"
+                  variant={'link'}
+                  onPress={() => console.log('heart')}>
+                  <View style={s.heart}>
+                    <Heart
+                      name="heart-circle"
+                      size={moderateScale(40, 0.1)}
+                      color={'#FDBC2C'}
+                      solid
+                      style={s.heartIcon}
+                    />
+                  </View>
+                </Button>
+                <Button
+                  size="sm"
+                  variant={'link'}
+                  onPress={() => setIsPlaying(m => !m)}>
+                  <View>
+                    <Play
+                      name="play-circle"
+                      size={moderateScale(60, 0.1)}
+                      color={'#fff'}
+                      solid
+                    />
+                  </View>
+                </Button>
+
+                <View style={[s.heading]}>
+                  <Text
+                    style={[s.headingText1, s.postText, {color: textColor}]}>
+                    Your Dream Houses
+                  </Text>
+                </View>
+                <Button
+                  size="sm"
+                  variant={'link'}
+                  onPress={() => console.log('share')}>
+                  <View style={[s.share]}>
+                    <Share
+                      name="share-square-o"
+                      size={moderateScale(20, 0.1)}
+                      color={'#fff'}
+                      solid
+                      style={s.heartIcon}
+                    />
+                  </View>
+                </Button>
+              </View>
+              <View>
+                <Text style={[s.caption, {color: textColor}]}>
+                  is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy.is simply
+                  dummy text of the printing and typesetting industry. Lorem
+                  Ipsum has been the industry's standard dummy.
+                </Text>
+              </View>
+              <View>
+                <Text style={s.datePosted}>Posted On 14-Sep-2022</Text>
+              </View>
+            </View>
+          ))}
         </View>
-        <View>
-          <Video
-            source={{
-              uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-            }}
-            paused={!isPlaying}
-            controls={true}
-            style={s.backgroundVideo}
-            muted={isMuted}
-          />
-          <Button
-            size="sm"
-            variant={'link'}
-            onPressIn={() => navigation.navigate('Register')}>
-            {/* <View style={s.link}>
-              <Icon />
-            </View> */}
-          </Button>
-          {/* <Button
-            onPress={() => setIsMuted(m => !m)}
-            title={isMuted ? 'Unmute' : 'Mute'}
-          /> */}
-        </View>
-        {/* <View>
-        //   <Video
-        //     source={{
-        //       uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-        //     }} // the video file
-        //     paused={false} // make it start
-        //     style={s.backgroundVideo} // any style you want
-        //     repeat={true} // make it a loop
-        //   />
-        // </View> */}
       </ScrollView>
     </View>
   );

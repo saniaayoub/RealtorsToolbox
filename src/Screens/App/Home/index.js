@@ -91,7 +91,9 @@ const Home = ({navigation}) => {
 
       <View>
         <Image source={HomeImg} resizeMode="cover" style={s.backImg} />
-        <TouchableOpacity style={s.dartView}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('MyWhy')}
+          style={s.dartView}>
           <Image source={Dart} resizeMode="cover" style={s.dart} />
           <Text style={[s.dartText]}>My why</Text>
         </TouchableOpacity>

@@ -14,7 +14,7 @@ import HomeStack from '../Stacks/HomeStack';
 import BOMStack from '../Stacks/BOMStack';
 import InspireMeStack from '../Stacks/InspireMeStack';
 import MessageStack from '../Stacks/InspireMeStack';
-import ScheduleStack from '../Stacks/InspireMeStack';
+import ScheduleStack from '../Stacks/ScheduleStack';
 
 const MonteseratBold = 'Montserrat-Bold';
 
