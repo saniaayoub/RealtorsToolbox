@@ -25,7 +25,7 @@ import HomeImg from '../../../../assets/images/png/homeImg.png';
 import Graph from '../../../../assets/images/png/Graph.png';
 import Plus from 'react-native-vector-icons/AntDesign';
 
-const MyWhy = ({navigation}) => {
+const Monthly = ({navigation}) => {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
@@ -70,7 +70,7 @@ const MyWhy = ({navigation}) => {
           <Button
             size="sm"
             onPressIn={async () => {
-              navigation.navigate('Monthly');
+              console.log('Monthly');
             }}
             variant={'solid'}
             style={s.btn}>
@@ -98,4 +98,4 @@ const MyWhy = ({navigation}) => {
   );
 };
 
-export default MyWhy;
+export default Monthly;

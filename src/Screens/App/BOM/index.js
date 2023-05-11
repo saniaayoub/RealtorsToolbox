@@ -158,7 +158,7 @@ const BookoftheMonth = ({navigation}) => {
                     w="80%"
                     variant={'unstyled'}
                     backgroundColor={'#5A5A5A'}
-                    style={{color: '#fff'}}
+                    style={{color: textColor}}
                     InputRightElement={
                       <View style={s.send}>
                         <TouchableOpacity onPress={() => console.log('send')}>

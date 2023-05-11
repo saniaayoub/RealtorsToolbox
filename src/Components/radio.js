@@ -1,17 +1,21 @@
 import {StyleSheet, Text, View, TouchableOpacity, Platform} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
-
+import {useDispatch, useSelector} from 'react-redux';
 const InterMedium = 'Montserrat-Light';
 
 const radio = ({onPress, selected, children}) => {
+  const theme = useSelector(state => state.reducer.theme);
+  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   return (
     <View style={styles.radioButtonContainer}>
       <TouchableOpacity onPress={onPress} style={styles.radioButton}>
         {selected ? <View style={styles.radioButtonIcon} /> : null}
       </TouchableOpacity>
       <TouchableOpacity onPress={onPress}>
-        <Text style={styles.radioButtonText}>{children}</Text>
+        <Text style={[styles.radioButtonText, {color: textColor}]}>
+          {children}
+        </Text>
       </TouchableOpacity>
     </View>
   );

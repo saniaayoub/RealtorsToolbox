@@ -11,6 +11,7 @@ import {
   Animated,
   ScrollView,
   FlatList,
+  Alert,
 } from 'react-native';
 import {Button} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
@@ -22,14 +23,30 @@ import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Header from '../../../Components/header';
 import Plus from 'react-native-vector-icons/AntDesign';
-import {Agenda} from 'react-native-calendars';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 const Schedule = ({navigation}) => {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
-
+  const marked = {
+    '2023-05-15': {
+      // marked: true,
+      selected: true,
+      disableTouchEvent: true,
+    },
+    '2023-05-19': {
+      // marked: true,
+      selected: true,
+      disableTouchEvent: true,
+    },
+    '2023-06-20': {
+      // marked: true,
+      selected: true,
+      disableTouchEvent: true,
+    },
+  };
   const [selected, setSelected] = useState('');
 
   useEffect(() => {
@@ -50,7 +67,7 @@ const Schedule = ({navigation}) => {
           <Button
             size="sm"
             onPressIn={async () => {
-              console.log('Add Appointment');
+              navigation.navigate('AddAppointment');
             }}
             variant={'solid'}
             style={s.btn}>
@@ -68,25 +85,36 @@ const Schedule = ({navigation}) => {
           </Button>
         </View>
 
-        <View style={{flex: 1}}>
-          <Agenda
-            items={{
-              '2022-01-01': [{text: 'Item 1'}, {text: 'Item 2'}],
-              '2022-01-02': [{text: 'Item 3'}],
-              '2022-01-03': [{text: 'Item 4'}, {text: 'Item 5'}],
+        <View style={{flex: 1, backgroundColor: backColor}}>
+          <Calendar
+            onDayPress={day => {
+              console.warn(day);
             }}
-            loadItemsForMonth={month => {
-              // Load items for the month here
-            }}
-            renderItem={item => {
-              console.log(item, item);
-              return (
-                <View>
-                  <Text>{item.text}</Text>
-                </View>
-              );
+            markedDates={marked}
+            theme={{
+              calendarBackground: backColor,
+              dayTextColor: textColor,
+              textDisabledColor: '#444',
+              monthTextColor: textColor,
+              selectedDayBackgroundColor: '#FDBC2C',
             }}
           />
+          {/* <Agenda
+            selected="2022-12-01"
+            items={{
+              '2022-12-01': [
+                {name: 'Cycling'},
+                {name: 'Walking'},
+                {name: 'Running'},
+              ],
+              '2022-12-02': [{name: 'Writing'}],
+            }}
+            renderItem={(item, isFirst) => (
+              <TouchableOpacity style={s.item}>
+                <Text style={s.itemText}>{item.name}</Text>
+              </TouchableOpacity>
+            )}
+          /> */}
         </View>
       </ScrollView>
     </View>

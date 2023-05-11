@@ -22,10 +22,6 @@ import HeaderTabs from '../../../Components/headerTabs';
 import HomeImg from '../../../assets/images/png/homeImg.png';
 import Graph from '../../../assets/images/png/Graph.png';
 import Dart from '../../../assets/images/png/dart.png';
-const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const passRegex = new RegExp(
-  '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
-);
 
 const Data = [
   {

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderWidth: moderateScale(1, 0.1),
     backgroundColor: 'transparent',
     borderRadius: moderateScale(50, 0.1),
-    width: 0.4 * width,
+    width: 0.3 * width,
     height: 0.05 * height,
     alignItems: 'center',
   },
@@ -37,22 +37,6 @@ const styles = StyleSheet.create({
     lineHeight: moderateScale(15, 0.1),
     fontFamily: MonteseratBold,
     marginLeft: moderateScale(10, 0.1),
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  item: {
-    backgroundColor: 'white',
-    flex: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    marginTop: 17,
-  },
-  itemText: {
-    color: '#888',
-    fontSize: 16,
   },
   btnView: {
     flexDirection: 'row',
