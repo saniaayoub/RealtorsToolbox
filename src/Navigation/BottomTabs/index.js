@@ -8,13 +8,13 @@ import ChatIcon from 'react-native-vector-icons/Ionicons';
 import Bulb from 'react-native-vector-icons/MaterialCommunityIcons';
 import Event from 'react-native-vector-icons/MaterialIcons';
 import Home from 'react-native-vector-icons/Foundation';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import HomeStack from '../Stacks/HomeStack';
 import BOMStack from '../Stacks/BOMStack';
 import InspireMeStack from '../Stacks/InspireMeStack';
 import MessageStack from '../Stacks/InspireMeStack';
 import ScheduleStack from '../Stacks/ScheduleStack';
+import SettingsStack from '../Stacks/SettingsStack';
 
 const MonteseratBold = 'Montserrat-Bold';
 
@@ -102,8 +102,8 @@ const BottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name={'MessageStack'}
-        component={MessageStack}
+        name={'SettingsStack'}
+        component={SettingsStack}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={s.tab}>

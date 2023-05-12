@@ -1,35 +1,23 @@
-import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  Easing,
-  TouchableOpacity,
-  Animated,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import {Text, View, Image, ScrollView} from 'react-native';
 import {Button} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
-import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
+import {setTheme} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import HomeImg from '../../../../assets/images/png/homeImg.png';
 import Graph from '../../../../assets/images/png/Graph.png';
 import Plus from 'react-native-vector-icons/AntDesign';
+import ImagePicker from '../../../../Components/imagePickerModal';
 
 const MyWhy = ({navigation}) => {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const [showCamera, setShowCamera] = useState(false);
   useEffect(() => {
     dispatch(setTheme('dark'));
   }, []);
@@ -48,7 +36,7 @@ const MyWhy = ({navigation}) => {
           <Button
             size="sm"
             onPressIn={async () => {
-              console.log('add photos');
+              setShowCamera(true);
             }}
             variant={'solid'}
             style={s.btn}>
@@ -81,7 +69,7 @@ const MyWhy = ({navigation}) => {
           <Button
             size="sm"
             onPressIn={async () => {
-              console.log('Yearly');
+              navigation.navigate('Yearly');
             }}
             variant={'solid'}
             style={s.btn}>
@@ -93,6 +81,10 @@ const MyWhy = ({navigation}) => {
         <View style={s.graphView}>
           <Image source={Graph} resizeMode="contain" style={s.graph} />
         </View>
+        <ImagePicker
+          modalVisible={showCamera}
+          setModalVisible={setShowCamera}
+        />
       </ScrollView>
     </View>
   );

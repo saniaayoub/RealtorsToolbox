@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   gradientView: {
     borderRadius: moderateScale(5, 0.1),
-    padding: moderateScale(10, 0.1),
+    padding: moderateScale(7, 0.1),
     paddingLeft: moderateScale(20, 0.1),
   },
   pressable: {

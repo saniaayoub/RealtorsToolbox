@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
   },
+  btnView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
   btn: {
     borderColor: '#FDBC2C',
     borderWidth: moderateScale(1, 0.1),
@@ -54,11 +59,7 @@ const styles = StyleSheet.create({
     color: '#888',
     fontSize: 16,
   },
-  btnView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
+
   backImg: {
     width: '100%',
     height: moderateScale(150, 0.1),

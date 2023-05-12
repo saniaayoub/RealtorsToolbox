@@ -1,18 +1,4 @@
-import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  Easing,
-  TouchableOpacity,
-  Animated,
-  ScrollView,
-  FlatList,
-  Alert,
-} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -23,14 +9,10 @@ import {setTheme, setUserToken} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import DownArrow from 'react-native-vector-icons/Entypo';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import PhoneInput from 'react-native-phone-input';
-import DatePicker from 'react-native-date-picker';
-import RadioButton from '../../../../Components/radio';
 import InviteModal from '../../../../Components/invitationModal';
 
 const Form = [
-  {title: 'Month', color: ['#FAFF00', '#ffffff']},
+  {title: 'Year', color: ['#FAFF00', '#ffffff']},
   {title: 'Target', color: ['#00FFB2', '#ffffff']},
   {title: 'Sales', color: ['#FF9900', '#ffffff']},
   {title: 'Pending', color: ['#00F0FF', '#ffffff']},
@@ -39,28 +21,39 @@ const Form = [
   {title: 'No. of Booking', color: ['#FF00F5', '#ffffff']},
 ];
 
-const Month = [
-  {month: 'January'},
-  {month: 'February'},
-  {month: 'March'},
-  {month: 'April'},
-  {month: 'May'},
-  {month: 'June'},
-  {month: 'July'},
-  {month: 'August'},
-  {month: 'September'},
-  {month: 'October'},
-  {month: 'November'},
-  {month: 'December'},
+const Year = [
+  {year: '1999'},
+  {year: '2000'},
+  {year: '2001'},
+  {year: '2002'},
+  {year: '2003'},
+  {year: '2004'},
+  {year: '2005'},
+  {year: '2006'},
+  {year: '2007'},
+  {year: '2008'},
+  {year: '2009'},
+  {year: '2011'},
+  {year: '2012'},
+  {year: '2013'},
+  {year: '2014'},
+  {year: '2015'},
+  {year: '2016'},
+  {year: '2017'},
+  {year: '2018'},
+  {year: '2019'},
+  {year: '2020'},
+  {year: '2021'},
+  {year: '2022'},
+  {year: '2023'},
 ];
-const Monthly = ({navigation}) => {
+const Yearly = ({navigation}) => {
   const dispatch = useDispatch();
 
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
-
-  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
   const [showInviteModal, setShowInviteModal] = useState(false);
 
   useEffect(() => {
@@ -77,11 +70,11 @@ const Monthly = ({navigation}) => {
           <HeaderTabs navigation={navigation} />
         </View>
         <View style={[s.heading]}>
-          <Text style={[s.headingText, {color: textColor}]}>Monthly</Text>
+          <Text style={[s.headingText, {color: textColor}]}>Yearly</Text>
         </View>
         <View style={s.inputContainer}>
           {Form.map((item, index) => {
-            if (item?.title == 'Month') {
+            if (item?.title == 'Year') {
               return (
                 <LinearGradient
                   colors={item?.color}
@@ -99,7 +92,7 @@ const Monthly = ({navigation}) => {
                       trigger={triggerProps => {
                         return (
                           <Pressable
-                            accessibilityLabel="Month"
+                            accessibilityLabel="Year"
                             {...triggerProps}
                             style={s.pressable}>
                             <Text
@@ -107,7 +100,7 @@ const Monthly = ({navigation}) => {
                                 s.inputText,
                                 {width: '93%', color: textColor},
                               ]}>
-                              {month ? month : 'Month'}
+                              {year ? year : 'Year'}
                             </Text>
                             <DownArrow
                               name={'chevron-down'}
@@ -117,15 +110,15 @@ const Monthly = ({navigation}) => {
                           </Pressable>
                         );
                       }}>
-                      {Month.map((v, i) => {
+                      {Year.map((v, i) => {
                         return (
                           <Menu.Item
                             style={s.menuItem}
                             onPress={() => {
-                              setMonth(v.month);
+                              setYear(v.year);
                             }}>
                             <Text style={[s.optionBtns, {color: textColor}]}>
-                              {v.month}
+                              {v.year}
                             </Text>
                           </Menu.Item>
                         );
@@ -177,4 +170,4 @@ const Monthly = ({navigation}) => {
   );
 };
 
-export default Monthly;
+export default Yearly;

@@ -29,7 +29,7 @@ const HeaderTabs = props => {
           resizeMode="contain"
           style={{
             height: moderateScale(28, 0.1),
-            height: moderateScale(28, 0.1),
+            width: moderateScale(28, 0.1),
           }}
         />
       </TouchableOpacity>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3F3E3E',
 
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     padding: moderateScale(10, 0.1),
     borderRadius: moderateScale(5, 0.1),
   },

@@ -1,9 +1,6 @@
 import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-
 const MonteseratBold = 'Montserrat-Bold';
 const MonteseratRegular = 'Montserrat-Regular';
 const MonteseratLight = 'Montserrat-Light';
@@ -18,10 +15,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingVertical: moderateScale(10, 0.1),
+    marginBottom: moderateScale(15, 0.1),
+  },
+  row: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingVertical: moderateScale(15, 0.1),
+    borderTopWidth: moderateScale(1, 0.1),
+    borderBottomWidth: moderateScale(1, 0.1),
   },
   headingText: {
     fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
+  },
+  backColor: {
+    // backgroundColor: '#FAFF00',
+    marginVertical: moderateScale(20, 0.1),
+    paddingVertical: moderateScale(10, 0.1),
+    paddingHorizontal: moderateScale(20, 0.1),
+    borderRadius: moderateScale(10, 0, 1),
+    color: '#000',
+  },
+  headingText1: {
+    flex: 0.25,
+    fontSize: moderateScale(14, 0.1),
+    fontFamily: MonteseratLight,
   },
   inputContainer: {
     flexDirection: 'column',
@@ -45,7 +64,7 @@ const styles = StyleSheet.create({
   },
   gradientView: {
     borderRadius: moderateScale(5, 0.1),
-    padding: moderateScale(10, 0.1),
+    padding: moderateScale(7, 0.1),
     paddingLeft: moderateScale(20, 0.1),
   },
   pressable: {
