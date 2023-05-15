@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Cross from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
 import CameraOpt from './CameraOpt';
+
 const MonteseratBold = 'Montserrat-Bold';
 const MonteseratLight = 'Montserrat-Light';
 
@@ -30,7 +31,18 @@ const ImagePicker = ({modalVisible, setModalVisible}) => {
           end={{x: 1.0, y: 1.0, z: 1.0}}
           style={[s.item]}>
           <View style={[s.gradientView, {backgroundColor: backColor}]}>
+            <Text style={[s.headingText, {color: textColor}]}>Add Photo</Text>
+
             <CameraOpt />
+            <Button
+              size="sm"
+              onPressIn={async () => {
+                setModalVisible(!modalVisible);
+              }}
+              variant={'solid'}
+              style={s.btn}>
+              <Text style={s.btnText}>Cancel</Text>
+            </Button>
           </View>
         </LinearGradient>
       </View>
@@ -41,17 +53,12 @@ const ImagePicker = ({modalVisible, setModalVisible}) => {
 export default ImagePicker;
 
 const s = StyleSheet.create({
-  cancel: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    right: moderateScale(10, 0.1),
-    top: moderateScale(10, 0.1),
-  },
   item: {
-    width: '85%',
-    height: '40%',
+    width: '80%',
+    height: '50%',
     alignItems: 'center',
     justifyContent: 'center',
+
     borderRadius: moderateScale(25, 0.1),
   },
   gradientView: {
@@ -63,48 +70,23 @@ const s = StyleSheet.create({
   },
   headingText: {
     width: '65%',
+    marginBottom: moderateScale(25, 0.1),
     textAlign: 'center',
-    fontSize: moderateScale(18, 0.1),
+    fontSize: moderateScale(20, 0.1),
     lineHeight: moderateScale(30, 0.1),
-    fontFamily: MonteseratLight,
+    fontFamily: MonteseratBold,
   },
 
-  headingText1: {
-    paddingTop: moderateScale(10, 0.1),
-    width: '50%',
-    textAlign: 'center',
-    fontSize: moderateScale(35, 0.1),
-    // lineHeight: moderateScale(30, 0.1),
-    fontFamily: MonteseratBold,
-  },
   btn: {
-    marginTop: moderateScale(40, 0.1),
-    backgroundColor: '#FDBC2C',
-    borderRadius: moderateScale(50, 0.1),
-    width: moderateScale(120, 0.1),
-    height: moderateScale(35, 0.1),
-    alignItems: 'center',
-  },
-  btn1: {
     backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#FDBC2C',
+    marginTop: moderateScale(25, 0.1),
   },
-  btnView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  btns: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-evenly',
-  },
+
   btnText: {
-    fontSize: moderateScale(16, 0.1),
-    lineHeight: moderateScale(18, 0.1),
+    fontSize: moderateScale(20, 0.1),
+    lineHeight: moderateScale(24, 0.1),
     fontFamily: MonteseratBold,
-    color: '#fff',
+    color: '#FDBC2C',
   },
 
   centeredView: {

@@ -12,16 +12,12 @@ const HeaderTabs = props => {
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   return (
-    <View
-      style={styles.container}
-      onPress={() => {
-        props.navigation.goBack();
-      }}>
-      <TouchableOpacity onPress={() => console.log('bell')}>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('Notifications')}>
         <Bell name="bell" size={moderateScale(28, 0.1)} color={'#fff'} solid />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('FAQ')}>
-        {/* <Faq /> */}
+      <TouchableOpacity onPress={() => props.navigation.navigate('FAQs')}>
         <Image
           source={FaqImg}
           width={undefined}
@@ -33,7 +29,8 @@ const HeaderTabs = props => {
           }}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('setting')}>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('UserSettings')}>
         <Setting
           name="settings-sharp"
           size={moderateScale(28, 0.1)}
@@ -51,7 +48,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     backgroundColor: '#3F3E3E',
-
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: moderateScale(10, 0.1),

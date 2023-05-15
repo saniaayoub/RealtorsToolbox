@@ -158,7 +158,7 @@ const Monthly = ({navigation}) => {
             <Button
               size="sm"
               onPressIn={async () => {
-                dispatch(setUserToken('sania'));
+                console.log('save');
               }}
               variant={'solid'}
               style={s.btn}>
@@ -168,10 +168,6 @@ const Monthly = ({navigation}) => {
             </Button>
           </View>
         </View>
-        <InviteModal
-          modalVisible={showInviteModal}
-          setModalVisible={setShowInviteModal}
-        />
       </ScrollView>
     </View>
   );

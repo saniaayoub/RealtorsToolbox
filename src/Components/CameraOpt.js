@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,13 +6,25 @@ import {
   PermissionsAndroid,
   Platform,
   StyleSheet,
+  Image,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+
+const MonteseratBold = 'Montserrat-Bold';
+const MonteseratLight = 'Montserrat-Light';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {moderateScale} from 'react-native-size-matters';
+import Image1 from '../assets/images/png/imagepicker.png';
 
 const CameraOpt = ({}) => {
+  const [open, setOpen] = useState(false);
+
+  const theme = useSelector(state => state.reducer.theme);
+  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
+  const backColor = theme === 'dark' ? '#232323' : '#fff';
+
   const requestExternalReadPermission = async () => {
     if (Platform.OS === 'android') {
       try {
@@ -86,7 +98,7 @@ const CameraOpt = ({}) => {
       })
         .then(image => {
           if (image.assets) {
-            console.log(image.assets[0].uri);
+            console.warn(image.assets[0].uri);
           }
         })
         .catch(error => {
@@ -108,7 +120,7 @@ const CameraOpt = ({}) => {
         })
           .then(image => {
             if (image.assets) {
-              console.log(image?.assets[0]?.uri);
+              console.warn(image?.assets[0]?.uri);
             }
           })
           .catch(error => {
@@ -120,22 +132,30 @@ const CameraOpt = ({}) => {
   const CamerOpt = () => {
     return (
       <View style={s.camerOpt}>
-        <View style={s.camerbtn}>
+        {open ? (
+          <View style={[s.camerbtn, s.imgBtn]}>
+            <TouchableOpacity
+              style={s.cameraBtnContainer}
+              onPress={() => openCamer('c')}>
+              <FontAwesome5 name={'camera'} size={20} color={'#FDBC2C'} solid />
+              <Text style={[s.cameraBtnText, {color: '#fff'}]}>Camera</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={s.cameraBtnContainer}
+              onPress={() => openCamer('g')}>
+              <FontAwesome5 name={'image'} size={20} color={'#FDBC2C'} solid />
+              <Text style={[s.cameraBtnText, {color: '#fff'}]}>Gallery</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
           <TouchableOpacity
-            style={s.cameraBtnContainer}
-            onPress={() => openCamer('c')}>
-            <FontAwesome5 name={'camera'} size={20} color={'#C26AF8'} solid />
-            <Text style={s.cameraBtnText}>Camera</Text>
+            onPress={() => {
+              setOpen(true);
+            }}
+            style={s.imgBtn}>
+            <Image source={Image1} style={s.img} />
           </TouchableOpacity>
-        </View>
-        <View style={s.camerbtn}>
-          <TouchableOpacity
-            style={s.cameraBtnContainer}
-            onPress={() => openCamer('g')}>
-            <FontAwesome5 name={'image'} size={20} color={'#C26AF8'} solid />
-            <Text style={s.cameraBtnText}>Gallery</Text>
-          </TouchableOpacity>
-        </View>
+        )}
       </View>
     );
   };
@@ -146,24 +166,34 @@ export default CameraOpt;
 
 const s = StyleSheet.create({
   camerOpt: {
-    display: 'flex',
+    backgroundColor: '#404040',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    paddingHorizontal: moderateScale(20, 0.1),
+    paddingHorizontal: moderateScale(5, 0.1),
+    borderRadius: moderateScale(25, 0.1),
+  },
+  img: {
+    width: '40%',
+    height: '40%',
+  },
+  imgBtn: {
+    backgroundColor: '#404040',
+    width: moderateScale(140, 0.1),
+    height: moderateScale(130, 0.1),
+    borderRadius: moderateScale(25, 0.1),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   camerbtn: {
     marginVertical: moderateScale(10, 0.1),
   },
   cameraBtnContainer: {
-    display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginVertical: moderateScale(10, 0.1),
   },
-  // cameraBtnText: {
-  //   color: '#000',
-  //   fontFamily: InterBold,
-  //   marginLeft: 10,
-  //   // fontWeight: 'bold',
-  // },
+  cameraBtnText: {
+    fontSize: moderateScale(14, 0.1),
+    fontFamily: MonteseratBold,
+    marginLeft: moderateScale(10, 0.1),
+  },
 });

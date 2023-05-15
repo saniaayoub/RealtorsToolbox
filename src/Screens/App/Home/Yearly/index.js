@@ -9,7 +9,6 @@ import {setTheme, setUserToken} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import DownArrow from 'react-native-vector-icons/Entypo';
-import InviteModal from '../../../../Components/invitationModal';
 
 const Form = [
   {title: 'Year', color: ['#FAFF00', '#ffffff']},
@@ -54,10 +53,9 @@ const Yearly = ({navigation}) => {
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   const [year, setYear] = useState(null);
-  const [showInviteModal, setShowInviteModal] = useState(false);
 
   useEffect(() => {
-    dispatch(setTheme('dark'));
+    dispatch(setTheme('darks'));
   }, []);
 
   return (
@@ -87,7 +85,8 @@ const Yearly = ({navigation}) => {
                       borderWidth={moderateScale(1, 0.1)}
                       borderBottomColor={'#d3d3d3'}
                       backgroundColor={backColor}
-                      marginLeft={moderateScale(80, 0.1)}
+                      marginLeft={moderateScale(120, 0.1)}
+                      marginBottom={moderateScale(50, 0.1)}
                       borderColor={textColor}
                       trigger={triggerProps => {
                         return (
@@ -151,7 +150,7 @@ const Yearly = ({navigation}) => {
             <Button
               size="sm"
               onPressIn={async () => {
-                dispatch(setUserToken('sania'));
+                console.log('save');
               }}
               variant={'solid'}
               style={s.btn}>
@@ -161,10 +160,6 @@ const Yearly = ({navigation}) => {
             </Button>
           </View>
         </View>
-        <InviteModal
-          modalVisible={showInviteModal}
-          setModalVisible={setShowInviteModal}
-        />
       </ScrollView>
     </View>
   );
