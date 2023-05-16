@@ -6,6 +6,8 @@ import Yearly from '../../../Screens/App/Home/Yearly';
 import Notifications from '../../../Screens/App/Notifications';
 import FAQs from '../../../Screens/App/FAQs';
 import UserSettings from '../../../Screens/App/Settings';
+import EditProfile from '../../../Screens/App/Settings/EditProfile';
+
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
@@ -18,6 +20,7 @@ const HomeStack = () => {
       <Stack.Screen name="Notifications" component={Notifications} />
       <Stack.Screen name="FAQs" component={FAQs} />
       <Stack.Screen name="UserSettings" component={UserSettings} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   );
 };

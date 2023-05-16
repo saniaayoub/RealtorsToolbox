@@ -14,17 +14,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(15, 0.1),
   },
   heading: {
-    width: '50%',
-    alignSelf: 'center',
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: moderateScale(20, 0.1),
-    marginBottom: moderateScale(10, 0.1),
-    borderBottomWidth: moderateScale(1, 0.1),
+    justifyContent: 'center',
+    flexDirection: 'column',
+    paddingVertical: moderateScale(10, 0.1),
   },
   headingText: {
-    fontSize: moderateScale(18, 0.1),
+    marginTop: moderateScale(10, 0.1),
+    fontSize: moderateScale(20, 0.1),
     fontFamily: MonteseratBold,
+    lineHeight: moderateScale(22, 0.1),
   },
   textRegular: {
     fontSize: moderateScale(12, 0.1),
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     paddingLeft: moderateScale(5, 0.1),
-    fontSize: moderateScale(15, 0.1),
+    fontSize: moderateScale(13, 0.1),
     fontFamily: MonteseratLight,
     lineHeight: moderateScale(18, 0.1),
   },
