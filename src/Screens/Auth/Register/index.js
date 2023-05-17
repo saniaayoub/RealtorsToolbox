@@ -52,8 +52,10 @@ const Register = ({navigation}) => {
   const [phNumErr, setPhNumErr] = useState('');
   const [loader, setLoader] = useState(false);
   const [submitted, setSubmitted] = useState();
-  const theme = useSelector(state => state.reducer.theme);
-  const Textcolor = theme === 'dark' ? '#fff' : '#222222';
+  const [borderColor, setBorderColor] = useState('#d3d3d3');
+
+  const Textcolor = '#fff';
+
   const [isSelected, setIsSelected] = useState([
     {
       id: 1,
@@ -186,7 +188,7 @@ const Register = ({navigation}) => {
                 s.input,
                 s.inputContainerStyle,
                 {
-                  borderBottomColor: '#fff',
+                  borderBottomColor: borderColor,
                   borderBottomWidth: 1,
                   // flexDirection: 'row',
                 },
@@ -204,9 +206,9 @@ const Register = ({navigation}) => {
                 ref={phonenum}
                 onChangePhoneNumber={phNumber => {
                   if (phonenum.current.isValidNumber()) {
-                    setPhNumErr('');
+                    setBorderColor('#d3d3d3');
                   } else {
-                    setPhNumErr('*');
+                    setBorderColor('red');
                   }
                 }}
               />

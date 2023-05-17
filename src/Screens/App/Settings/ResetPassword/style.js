@@ -9,62 +9,52 @@ const MonteseratRegular = 'Montserrat-Regular';
 const MonteseratLight = 'Montserrat-Light';
 
 const styles = StyleSheet.create({
-  backImg: {
+  mainContainer: {
     flex: 1,
-    height: height,
     paddingHorizontal: moderateScale(15, 0.1),
   },
-
-  blurContainer: {
-    // width: 0.8 * width,
-    // height: 0.3 * height,
-    marginTop: moderateScale(50, 0.1),
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderColor: 'grey',
-    borderWidth: moderateScale(1, 0.1),
-    borderRadius: moderateScale(25, 0.1),
-    // paddingLeft: moderateScale(15, 0.1),
-  },
-  headingView: {
-    marginVertical: moderateScale(50, 0.1),
-  },
-  inputView: {
+  heading: {
+    width: '50%',
+    alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: moderateScale(20, 0.1),
+    marginBottom: moderateScale(20, 0.1),
+    borderBottomWidth: moderateScale(1, 0.1),
   },
-
+  headingText: {
+    fontSize: moderateScale(18, 0.1),
+    fontFamily: MonteseratBold,
+  },
+  inputContainer: {
+    flexDirection: 'column',
+    marginBottom: moderateScale(10, 0.1),
+  },
   input: {
     marginBottom: moderateScale(20, 0.1),
   },
   inputText: {
     color: '#fff',
-    fontSize: moderateScale(14, 0.1),
+    fontSize: moderateScale(15, 0.1),
     fontFamily: MonteseratLight,
   },
   iconCircle: {
-    marginRight: moderateScale(15, 0.1),
+    marginRight: moderateScale(25, 0.1),
   },
-  heading1: {
-    fontFamily: MonteseratBold,
-    fontSize: moderateScale(28, 0.1),
-    color: '#fff',
-  },
-
   btn: {
-    marginVertical: moderateScale(50, 0.1),
+    marginTop: moderateScale(40, 0.1),
     backgroundColor: '#FDBC2C',
     borderRadius: moderateScale(50, 0.1),
     width: moderateScale(145, 0.1),
     height: moderateScale(43, 0.1),
     alignItems: 'center',
   },
-  btnView: {
-    flexDirection: 'row',
+  btns: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   btnText: {
-    fontSize: moderateScale(15, 0.1),
+    fontSize: moderateScale(16, 0.1),
     lineHeight: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
     color: '#fff',

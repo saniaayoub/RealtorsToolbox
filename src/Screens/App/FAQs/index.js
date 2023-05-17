@@ -56,9 +56,7 @@ const FAQs = ({navigation}) => {
 
   const [selected, setSelected] = useState([]);
 
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   const remove = index => {
     let temp = [...selected];

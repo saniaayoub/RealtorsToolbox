@@ -30,7 +30,7 @@ const HeaderTabs = props => {
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('UserSettings')}>
+        onPress={() => props.navigation.navigate('SettingsStack')}>
         <Setting
           name="settings-sharp"
           size={moderateScale(28, 0.1)}

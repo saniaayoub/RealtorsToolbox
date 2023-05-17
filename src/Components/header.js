@@ -8,6 +8,8 @@ const Header = props => {
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const userToken = useSelector(state => state.reducer.userToken);
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -17,7 +19,7 @@ const Header = props => {
       <Icon
         name="leftcircle"
         size={moderateScale(30, 0.1)}
-        color={textColor}
+        color={userToken ? textColor : '#fff'}
         solid
       />
     </TouchableOpacity>

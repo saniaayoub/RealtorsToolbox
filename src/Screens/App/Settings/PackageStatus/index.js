@@ -4,8 +4,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
-import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import PackageCard from '../../../../Components/packageCard';
@@ -26,9 +24,7 @@ const PackageStatus = ({navigation}) => {
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
 
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>

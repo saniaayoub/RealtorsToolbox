@@ -18,32 +18,18 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
-import LinearGradient from 'react-native-linear-gradient';
 import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Header from '../../../Components/header';
-import Edit from 'react-native-vector-icons/Entypo';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import PhoneInput from 'react-native-phone-input';
-import DatePicker from 'react-native-date-picker';
-import RadioButton from '../../../Components/radio';
-import InviteModal from '../../../Components/invitationModal';
-import dummyImg from '../../../assets/images/png/dummyImg1.png';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
-
-import Feather from 'react-native-vector-icons/Feather';
-// import Icon2 from 'react-native-vector-icons/Fontisto';
-const Form = {
-  fullName: 'John Smith',
-  bio: 'My Property My Rules',
-  email: 'example@gmail.com',
-  password: 'password',
-  phNumber: '+123-465-789-00',
-  location: 'USA',
-  gender: 'Male',
-};
+import SwitchWithIcons from 'react-native-switch-with-icons';
+import sun from '../../../assets/images/png/sun.png';
+import moon from '../../../assets/images/png/moon.png';
+import logout from '../../../assets/images/png/LogOut.png';
+import logouticon from '../../../assets/images/png/logouticon.png';
+import SwipeButton from 'rn-swipe-button';
 
 const UserSettings = ({navigation}) => {
   const dispatch = useDispatch();
@@ -52,42 +38,7 @@ const UserSettings = ({navigation}) => {
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
 
-  const [borderColor, setBorderColor] = useState('#d3d3d3');
-  const [appType, setAppType] = useState(null);
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
-  const [openDate, setOpenDate] = useState(false);
-  const [openTime, setOpenTime] = useState(false);
-  const [showInviteModal, setShowInviteModal] = useState(false);
-
-  const [gender, setGender] = useState('');
-  const [isSelected, setIsSelected] = useState([
-    {
-      id: 1,
-      name: 'Male',
-      selected: true,
-    },
-    {
-      id: 2,
-      name: 'Female',
-      selected: false,
-    },
-  ]);
-
-  const onRadioBtnClick = item => {
-    let updatedState = isSelected.map(isSelectedItem =>
-      isSelectedItem.id === item.id
-        ? {...isSelectedItem, selected: true}
-        : {...isSelectedItem, selected: false},
-    );
-    setIsSelected(updatedState);
-    setGender(item.name);
-    console.log(item.name);
-  };
-
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
@@ -96,14 +47,18 @@ const UserSettings = ({navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[{backgroundColor: backColor}]}>
-        <View style={s.tabs}>
+        <View>
           <HeaderTabs navigation={navigation} />
         </View>
         <View style={[s.heading, {borderBottomColor: textColor}]}>
           <Text style={[s.headingText, {color: textColor}]}>Settings</Text>
         </View>
         <View style={s.inputContainer}>
-          <TouchableOpacity style={[s.input]}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('EditProfile');
+            }}
+            style={[s.input]}>
             <Input
               w="100%"
               isReadOnly
@@ -123,7 +78,11 @@ const UserSettings = ({navigation}) => {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={[s.input]}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Privacy');
+            }}
+            style={[s.input]}>
             <Input
               w="100%"
               isReadOnly
@@ -142,7 +101,11 @@ const UserSettings = ({navigation}) => {
               style={[s.inputText, {color: textColor}]}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={[s.input]}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Help');
+            }}
+            style={[s.input]}>
             <Input
               w="100%"
               isReadOnly
@@ -161,18 +124,21 @@ const UserSettings = ({navigation}) => {
               style={[s.inputText, {color: textColor}]}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={[s.input]}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ResetPassword');
+            }}
+            style={[s.input]}>
             <Input
               isReadOnly
-              value={'Resest Password'}
               w="100%"
               variant="underlined"
-              placeholder={Form.password}
+              placeholder={'Resest Password'}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
                   <Icon1
-                    name={'lock'}
+                    name={'lock-reset'}
                     color={textColor}
                     size={moderateScale(22, 0.1)}
                   />
@@ -181,18 +147,21 @@ const UserSettings = ({navigation}) => {
               style={[s.inputText, {color: textColor}]}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={[s.input]}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('PackageStatus');
+            }}
+            style={[s.input]}>
             <Input
               isReadOnly
-              value={'Package Details'}
               w="100%"
               variant="underlined"
-              placeholder={Form.password}
+              placeholder={'Package Details'}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
                   <Icon1
-                    name={'lock'}
+                    name={'package-variant'}
                     color={textColor}
                     size={moderateScale(22, 0.1)}
                   />
@@ -202,18 +171,55 @@ const UserSettings = ({navigation}) => {
             />
           </TouchableOpacity>
 
-          <View style={s.btns}>
-            <Button
-              size="sm"
-              onPressIn={async () => {
-                dispatch(setUserToken('sania'));
+          <View style={s.switch}>
+            <Text style={[s.inputText1, {color: textColor}]}>
+              Dark & Light Mode
+            </Text>
+            <SwitchWithIcons
+              icon={{true: moon, false: sun}}
+              value={theme === 'dark' ? true : false}
+              onValueChange={() => {
+                if (theme === 'dark') {
+                  dispatch(setTheme('light'));
+                } else {
+                  dispatch(setTheme('dark'));
+                }
               }}
-              variant={'solid'}
-              style={s.btn}>
-              <View style={s.btnView}>
-                <Text style={s.btnText}>Save</Text>
-              </View>
-            </Button>
+              iconColor={{true: '#000', false: '#000'}}
+              trackColor={{true: '#343434', false: '#343434'}}
+              thumbColor={{true: '#FDBC2C', false: '#fff'}}
+            />
+          </View>
+
+          <View
+            style={{
+              marginVertical: moderateScale(25, 0.1),
+              alignSelf: 'flex-end',
+            }}>
+            <SwipeButton
+              onSwipeSuccess={() => {
+                dispatch(setUserToken(''));
+              }}
+              thumbIconImageSource={logouticon}
+              title="Log out"
+              titleStyles={s.logout}
+              railBackgroundColor={textColor}
+              railFillBackgroundColor={textColor}
+              railFillBorderColor={textColor}
+              thumbIconBackgroundColor="#FDBC2C"
+              thumbIconBorderColor="#FDBC2C"
+              height={moderateScale(35, 0.1)}
+              width={moderateScale(130, 0.1)}
+              thumbIconComponent={() => {
+                return (
+                  <Image
+                    source={logouticon}
+                    resizeMode="cover"
+                    style={s.logoutimg}
+                  />
+                );
+              }}
+            />
           </View>
         </View>
       </ScrollView>

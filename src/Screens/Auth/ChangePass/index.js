@@ -41,11 +41,8 @@ const ChangePass = ({navigation}) => {
   const [submitted, setSubmitted] = useState();
   const [loader, setLoader] = useState(false);
   const theme = useSelector(state => state.reducer.theme);
-  const showToast = msg => {
-    ToastAndroid.show(msg, ToastAndroid.LONG);
-  };
   const color = theme === 'dark' ? '#222222' : '#fff';
-  const Textcolor = theme === 'dark' ? '#fff' : '#222222';
+  const Textcolor = '#fff';
   const userToken = useSelector(state => state.reducer.userToken);
   useEffect(() => {}, []);
 
@@ -94,30 +91,13 @@ const ChangePass = ({navigation}) => {
                         />
                       </TouchableOpacity>
                     </View>
-                  ) : (
-                    <></>
-                  )
+                  ) : null
                 }
                 style={s.inputText}
                 secureTextEntry={showPass}
               />
             </View>
-            {submitted && (password == null || password == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
-                </View>
-              </>
-            ) : null}
+
             <View style={s.input}>
               <Input
                 w={{
@@ -148,30 +128,12 @@ const ChangePass = ({navigation}) => {
                         />
                       </TouchableOpacity>
                     </View>
-                  ) : (
-                    <></>
-                  )
+                  ) : null
                 }
                 style={s.inputText}
                 secureTextEntry={showConfPass}
               />
             </View>
-            {submitted && (confirmPassword == null || confirmPassword == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
-                </View>
-              </>
-            ) : null}
 
             <Button
               size="sm"

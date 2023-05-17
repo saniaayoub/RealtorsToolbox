@@ -49,9 +49,7 @@ const Schedule = ({navigation}) => {
   };
   const [selected, setSelected] = useState('');
 
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>

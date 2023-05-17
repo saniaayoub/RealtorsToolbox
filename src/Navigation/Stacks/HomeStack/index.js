@@ -5,8 +5,7 @@ import Monthly from '../../../Screens/App/Home/Monthly';
 import Yearly from '../../../Screens/App/Home/Yearly';
 import Notifications from '../../../Screens/App/Notifications';
 import FAQs from '../../../Screens/App/FAQs';
-import UserSettings from '../../../Screens/App/Settings';
-import EditProfile from '../../../Screens/App/Settings/EditProfile';
+import SettingsStack from '../SettingsStack';
 
 const Stack = createStackNavigator();
 
@@ -19,8 +18,7 @@ const HomeStack = () => {
       <Stack.Screen name="Yearly" component={Yearly} />
       <Stack.Screen name="Notifications" component={Notifications} />
       <Stack.Screen name="FAQs" component={FAQs} />
-      <Stack.Screen name="UserSettings" component={UserSettings} />
-      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="SettingsStack" component={SettingsStack} />
     </Stack.Navigator>
   );
 };

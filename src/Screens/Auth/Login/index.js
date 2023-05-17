@@ -68,11 +68,11 @@ const ForgetPass = ({navigation}) => {
                 variant="underlined"
                 InputLeftElement={
                   <View style={s.iconCircle}>
-                    <Icon name={'envelope'} color={Textcolor} size={18} />
+                    <Icon name={'envelope'} color={'#fff'} size={18} />
                   </View>
                 }
                 placeholder="Email Address"
-                placeholderTextColor={Textcolor}
+                placeholderTextColor={'#fff'}
                 value={email}
                 keyboardType="email-address"
                 onChangeText={email => {
@@ -106,12 +106,12 @@ const ForgetPass = ({navigation}) => {
                 }}
                 variant="underlined"
                 InputLeftElement={
-                  <View style={[s.iconCircle, {borderColor: Textcolor}]}>
-                    <Icon2 name="locked" color={Textcolor} size={18} />
+                  <View style={[s.iconCircle, {borderColor: '#fff'}]}>
+                    <Icon2 name="locked" color={'#fff'} size={18} />
                   </View>
                 }
                 placeholder="Password"
-                placeholderTextColor={Textcolor}
+                placeholderTextColor={'#fff'}
                 value={password}
                 onChangeText={password => {
                   setPassword(password);
@@ -122,7 +122,7 @@ const ForgetPass = ({navigation}) => {
                       <TouchableOpacity onPress={() => setshowPass(!showPass)}>
                         <Feather
                           name={showPass ? 'eye' : 'eye-off'}
-                          color={Textcolor}
+                          color={'#fff'}
                           size={moderateScale(20, 0.1)}
                         />
                       </TouchableOpacity>

@@ -47,7 +47,11 @@ const App = () => {
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <NavigationContainer>
-            {userToken === null ? <AuthStack /> : <BottomTabs />}
+            {userToken === null || userToken === '' ? (
+              <AuthStack />
+            ) : (
+              <BottomTabs />
+            )}
           </NavigationContainer>
         </KeyboardAvoidingView>
       </SafeAreaProvider>

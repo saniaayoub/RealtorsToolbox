@@ -63,9 +63,7 @@ const Monthly = ({navigation}) => {
   const [month, setMonth] = useState(null);
   const [showInviteModal, setShowInviteModal] = useState(false);
 
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>

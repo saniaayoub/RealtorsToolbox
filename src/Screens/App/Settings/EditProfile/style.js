@@ -43,11 +43,7 @@ const styles = StyleSheet.create({
     fontFamily: MonteseratLight,
     lineHeight: moderateScale(18, 0.1),
   },
-  inputContainerStyle: {
-    paddingVertical: moderateScale(10, 0.1),
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-  },
+
   icon: {
     marginRight: moderateScale(10, 0.1),
   },
@@ -57,18 +53,9 @@ const styles = StyleSheet.create({
     width: moderateScale(22, 0.1),
     height: moderateScale(22, 0.1),
     backgroundColor: '#FDBC2C',
-    // marginRight: moderateScale(15, 0.1),
     borderRadius: moderateScale(22 / 2, 0.1),
   },
-  pressable: {
-    flexDirection: 'row',
-    borderColor: '#d3d3d3',
-    borderBottomWidth: 1,
-    marginBottom: moderateScale(15, 0.1),
-    width: '100%',
-    alignItems: 'center',
-    paddingBottom: 10,
-  },
+
   radioInput: {
     marginTop: moderateScale(15, 0.1),
     marginBottom: moderateScale(25, 0.1),
@@ -86,15 +73,9 @@ const styles = StyleSheet.create({
     height: moderateScale(43, 0.1),
     alignItems: 'center',
   },
-  btnView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
   btns: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-around',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   btnText: {
     fontSize: moderateScale(16, 0.1),
@@ -102,57 +83,21 @@ const styles = StyleSheet.create({
     fontFamily: MonteseratBold,
     color: '#fff',
   },
-  description: {
-    borderWidth: moderateScale(1, 0.1),
-    borderColor: '#d3d3d3',
-    borderRadius: moderateScale(5, 0.1),
-    paddingHorizontal: moderateScale(15, 0.1),
-    paddingTop: moderateScale(15, 0.1),
-  },
-  textArea: {
-    marginLeft: moderateScale(5, 0.1),
-    fontSize: moderateScale(14, 0.1),
-  },
-  dateInput: {
-    borderBottomColor: '#d3d3d3',
-    justifyContent: 'flex-start',
-  },
-  container: {
-    flex: 1,
+  edit: {
+    width: moderateScale(18, 0.1),
+    height: moderateScale(18, 0.1),
+    borderRadius: moderateScale(18 / 2, 0.1),
+    // padding: moderateScale(5, 0.1),
     justifyContent: 'center',
-  },
-  item: {
-    backgroundColor: 'white',
-    flex: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    marginTop: 17,
-  },
-  itemText: {
-    color: '#888',
-    fontSize: 16,
+    alignItems: 'center',
+    borderColor: '#fff',
+    borderWidth: moderateScale(1, 0.1),
   },
   dp: {
     marginVertical: moderateScale(10, 0.1),
     width: moderateScale(75, 0.1),
     height: moderateScale(75, 0.1),
     borderRadius: moderateScale(75 / 2, 0.1),
-  },
-
-  backImg: {
-    width: '100%',
-    height: moderateScale(150, 0.1),
-    borderRadius: moderateScale(10, 0.1),
-  },
-  graphView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: moderateScale(100, 0.1),
-  },
-  graph: {
-    width: '100%',
-    height: moderateScale(235, 0.1),
   },
 });
 

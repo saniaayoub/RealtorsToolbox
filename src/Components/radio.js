@@ -6,6 +6,8 @@ const InterMedium = 'Montserrat-Light';
 
 const radio = ({onPress, selected, children}) => {
   const theme = useSelector(state => state.reducer.theme);
+  const userToken = useSelector(state => state.reducer.userToken);
+
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   return (
     <View style={styles.radioButtonContainer}>
@@ -13,7 +15,11 @@ const radio = ({onPress, selected, children}) => {
         {selected ? <View style={styles.radioButtonIcon} /> : null}
       </TouchableOpacity>
       <TouchableOpacity onPress={onPress}>
-        <Text style={[styles.radioButtonText, {color: textColor}]}>
+        <Text
+          style={[
+            styles.radioButtonText,
+            {color: userToken ? textColor : '#fff'},
+          ]}>
           {children}
         </Text>
       </TouchableOpacity>
@@ -27,8 +33,6 @@ const styles = StyleSheet.create({
   radioButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // marginBottom: moderateScale(5, 0.1),
-    // marginHorizontal: moderateScale(20, 0.1),
   },
   radioButton: {
     height: moderateScale(18, 0.1),

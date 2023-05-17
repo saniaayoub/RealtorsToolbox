@@ -26,47 +26,12 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
   },
-  inputContainer: {
-    flexDirection: 'column',
-    marginBottom: moderateScale(120, 0.1),
-  },
-  input: {
-    marginBottom: moderateScale(20, 0.1),
-  },
-  inputText: {
+
+  text: {
     paddingLeft: moderateScale(5, 0.1),
-    fontSize: moderateScale(15, 0.1),
+    fontSize: moderateScale(12, 0.1),
     fontFamily: MonteseratLight,
-    lineHeight: moderateScale(18, 0.1),
-  },
-  inputText1: {
-    fontSize: moderateScale(15, 0.1),
-    fontFamily: MonteseratBold,
-    lineHeight: moderateScale(18, 0.1),
-  },
-
-  icon: {
-    marginRight: moderateScale(10, 0.1),
-  },
-
-  switch: {
-    width: '100%',
-    marginTop: moderateScale(15, 0.1),
-    flexDirection: 'row',
-    paddingRight: moderateScale(10, 0.1),
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-  logout: {
-    paddingLeft: moderateScale(25, 0.1),
-    fontFamily: MonteseratBold,
-    fontSize: moderateScale(15, 0.1),
-    color: '#FDBC2C',
-  },
-  logoutimg: {
-    width: moderateScale(20, 0.1),
-    height: moderateScale(20, 0.1),
+    lineHeight: moderateScale(20, 0.1),
   },
 });
 

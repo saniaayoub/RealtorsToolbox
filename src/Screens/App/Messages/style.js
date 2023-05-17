@@ -15,9 +15,14 @@ const styles = StyleSheet.create({
   tabs: {
     paddingHorizontal: moderateScale(15, 0.1),
   },
+  headingView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   heading: {
     width: '50%',
-    alignSelf: 'center',
+
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: moderateScale(20, 0.1),
@@ -28,30 +33,45 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
   },
+  newChat: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: moderateScale(2, 0.1),
+    borderWidth: moderateScale(1, 0.1),
+    position: 'absolute',
+    bottom: -3,
+    right: -5,
+    borderRadius: moderateScale(24 / 2, 0.1),
+  },
   textRegular: {
     fontSize: moderateScale(12, 0.1),
-    fontFamily: MonteseratLight,
+    fontFamily: MonteseratBold,
   },
   textSmall: {
     marginTop: moderateScale(5, 0.1),
-    fontSize: moderateScale(10, 0.1),
+    fontSize: moderateScale(9, 0.1),
     fontFamily: MonteseratLight,
   },
   bold: {
     fontFamily: MonteseratBold,
   },
   notContainer: {
-    width: '100%',
+    // width: '100%',
+    flex: 1,
     flexDirection: 'column',
     marginBottom: moderateScale(120, 0.1),
   },
-  notification: {
+  message: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  message1: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
   not1: {
-    width: '100%',
+    // width: '100%',
     paddingVertical: moderateScale(15, 0.1),
     borderBottomWidth: moderateScale(0.5, 0.1),
   },
@@ -63,6 +83,13 @@ const styles = StyleSheet.create({
 
   description: {
     flexDirection: 'column',
+  },
+  chatIcon: {
+    position: 'absolute',
+    right: moderateScale(5, 0.1),
+    bottom: moderateScale(10, 0.1),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

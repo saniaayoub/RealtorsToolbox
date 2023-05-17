@@ -12,7 +12,7 @@ import Home from 'react-native-vector-icons/Foundation';
 import HomeStack from '../Stacks/HomeStack';
 import BOMStack from '../Stacks/BOMStack';
 import InspireMeStack from '../Stacks/InspireMeStack';
-import MessageStack from '../Stacks/InspireMeStack';
+import MessageStack from '../Stacks/MessageStack';
 import ScheduleStack from '../Stacks/ScheduleStack';
 import SettingsStack from '../Stacks/SettingsStack';
 
@@ -102,8 +102,8 @@ const BottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name={'SettingsStack'}
-        component={SettingsStack}
+        name={'MessageStack'}
+        component={MessageStack}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={s.tab}>

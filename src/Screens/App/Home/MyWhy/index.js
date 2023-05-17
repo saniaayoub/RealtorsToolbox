@@ -18,9 +18,7 @@ const MyWhy = ({navigation}) => {
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   const [showCamera, setShowCamera] = useState(false);
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
@@ -84,6 +82,7 @@ const MyWhy = ({navigation}) => {
         <ImagePicker
           modalVisible={showCamera}
           setModalVisible={setShowCamera}
+          screen={'Add Photo'}
         />
       </ScrollView>
     </View>

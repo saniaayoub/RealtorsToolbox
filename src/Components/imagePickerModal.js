@@ -10,7 +10,7 @@ import CameraOpt from './CameraOpt';
 const MonteseratBold = 'Montserrat-Bold';
 const MonteseratLight = 'Montserrat-Light';
 
-const ImagePicker = ({modalVisible, setModalVisible}) => {
+const ImagePicker = ({modalVisible, setModalVisible, screen}) => {
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
@@ -31,7 +31,7 @@ const ImagePicker = ({modalVisible, setModalVisible}) => {
           end={{x: 1.0, y: 1.0, z: 1.0}}
           style={[s.item]}>
           <View style={[s.gradientView, {backgroundColor: backColor}]}>
-            <Text style={[s.headingText, {color: textColor}]}>Add Photo</Text>
+            <Text style={[s.headingText, {color: textColor}]}>{screen}</Text>
 
             <CameraOpt />
             <Button

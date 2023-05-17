@@ -32,7 +32,7 @@ import dummyImg from '../../../../assets/images/png/dummyImg1.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
-
+import ImagePicker from '../../../../Components/imagePickerModal';
 import Feather from 'react-native-vector-icons/Feather';
 // import Icon2 from 'react-native-vector-icons/Fontisto';
 const Form = {
@@ -51,16 +51,15 @@ const UserProfile = ({navigation}) => {
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
-
   const [borderColor, setBorderColor] = useState('#d3d3d3');
-  const [appType, setAppType] = useState(null);
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
-  const [openDate, setOpenDate] = useState(false);
-  const [openTime, setOpenTime] = useState(false);
-  const [showInviteModal, setShowInviteModal] = useState(false);
+  const [showPass, setshowPass] = useState(true);
+  const [showCamera, setShowCamera] = useState(false);
+  const [disable1, setDisable1] = useState(false);
+  const [disable2, setDisable2] = useState(false);
+  const [disable3, setDisable3] = useState(false);
+  const [disable4, setDisable4] = useState(false);
+  const [disable5, setDisable5] = useState(false);
 
-  const [gender, setGender] = useState('');
   const [isSelected, setIsSelected] = useState([
     {
       id: 1,
@@ -81,13 +80,11 @@ const UserProfile = ({navigation}) => {
         : {...isSelectedItem, selected: false},
     );
     setIsSelected(updatedState);
-    setGender(item.name);
+
     console.log(item.name);
   };
 
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
@@ -102,6 +99,21 @@ const UserProfile = ({navigation}) => {
         <View style={[s.heading, {borderBottomColor: textColor}]}>
           <View style={[s.dp]}>
             <Image source={dummyImg} style={s.dp} resizeMode={'cover'} />
+
+            <TouchableOpacity
+              style={[
+                s.iconCircle,
+                {position: 'absolute', bottom: 0, right: 0},
+              ]}
+              onPressIn={async () => {
+                setShowCamera(true);
+              }}>
+              <Edit
+                name={'edit'}
+                size={moderateScale(10, 0.1)}
+                color={'#fff'}
+              />
+            </TouchableOpacity>
           </View>
           <Text style={[s.headingText, {color: textColor}]}>John Smith</Text>
           <Text style={[s.textRegular, {color: textColor}]}>
@@ -112,6 +124,8 @@ const UserProfile = ({navigation}) => {
           <View style={[s.input]}>
             <Input
               w="100%"
+              isReadOnly={!disable1}
+              isFocused={disable1}
               variant="underlined"
               placeholder={Form.fullName}
               placeholderTextColor={textColor}
@@ -125,7 +139,11 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity style={s.iconCircle}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDisable1(!disable1);
+                  }}
+                  style={s.iconCircle}>
                   <Edit
                     name={'edit'}
                     color={textColor}
@@ -140,6 +158,8 @@ const UserProfile = ({navigation}) => {
           <View style={[s.input]}>
             <Input
               w="100%"
+              isReadOnly={!disable2}
+              isFocused={disable2}
               variant="underlined"
               placeholder={Form.bio}
               placeholderTextColor={textColor}
@@ -153,7 +173,11 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity style={s.iconCircle}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDisable2(!disable2);
+                  }}
+                  style={s.iconCircle}>
                   <Edit
                     name={'edit'}
                     color={textColor}
@@ -167,6 +191,8 @@ const UserProfile = ({navigation}) => {
           <View style={[s.input]}>
             <Input
               w="100%"
+              isReadOnly={!disable3}
+              isFocused={disable3}
               variant="underlined"
               placeholder={Form.email}
               placeholderTextColor={textColor}
@@ -180,7 +206,11 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity style={s.iconCircle}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDisable3(!disable3);
+                  }}
+                  style={s.iconCircle}>
                   <Edit
                     name={'edit'}
                     color={textColor}
@@ -193,7 +223,7 @@ const UserProfile = ({navigation}) => {
           </View>
           <View style={[s.input]}>
             <Input
-              secureTextEntry
+              secureTextEntry={showPass}
               value={'password'}
               w="100%"
               variant="underlined"
@@ -209,9 +239,13 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity style={s.iconCircle}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setshowPass(!showPass);
+                  }}
+                  style={s.iconCircle}>
                   <Edit
-                    name={'edit'}
+                    name={'eye'}
                     color={textColor}
                     size={moderateScale(12, 0.1)}
                   />
@@ -231,6 +265,7 @@ const UserProfile = ({navigation}) => {
               },
             ]}>
             <PhoneInput
+              disabled={!disable4}
               initialCountry={'us'}
               initialValue="+123-465-789-00"
               textProps={{
@@ -260,12 +295,12 @@ const UserProfile = ({navigation}) => {
                 },
               ]}
               onPress={() => {
-                // setDisable4(!disable4);
-                // if (!disable4) {
-                //   setBorderColor('#33A9C4');
-                // } else {
-                //   setBorderColor(greyColor);
-                // }
+                setDisable4(!disable4);
+                if (!disable4) {
+                  setBorderColor('#33A9C4');
+                } else {
+                  setBorderColor('#D3D3D3');
+                }
               }}>
               <Edit
                 name={'edit'}
@@ -278,6 +313,8 @@ const UserProfile = ({navigation}) => {
           <View style={[s.input]}>
             <Input
               w="100%"
+              isReadOnly={!disable5}
+              isFocused={disable5}
               variant="underlined"
               placeholder={Form.location}
               placeholderTextColor={textColor}
@@ -291,7 +328,11 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity style={s.iconCircle}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDisable5(!disable5);
+                  }}
+                  style={s.iconCircle}>
                   <Edit
                     name={'edit'}
                     color={textColor}
@@ -325,15 +366,19 @@ const UserProfile = ({navigation}) => {
             <Button
               size="sm"
               onPressIn={async () => {
-                dispatch(setUserToken('sania'));
+                Alert.alert('Information Updated');
               }}
               variant={'solid'}
               style={s.btn}>
-              <View style={s.btnView}>
-                <Text style={s.btnText}>Save</Text>
-              </View>
+              <Text style={s.btnText}>Save</Text>
             </Button>
           </View>
+
+          <ImagePicker
+            modalVisible={showCamera}
+            setModalVisible={setShowCamera}
+            screen={'Update Profile'}
+          />
         </View>
       </ScrollView>
     </View>

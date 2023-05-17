@@ -76,9 +76,7 @@ const Notifications = ({navigation}) => {
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
 
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
@@ -98,6 +96,7 @@ const Notifications = ({navigation}) => {
           {NotificationList.map((item, index) => {
             return (
               <View
+                key={index}
                 style={[
                   [s.notification, s.not1, {borderBottomColor: textColor}],
                 ]}>

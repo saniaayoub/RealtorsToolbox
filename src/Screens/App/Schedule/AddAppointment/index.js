@@ -96,9 +96,7 @@ const AddAppointment = ({navigation}) => {
     console.log(item.name);
   };
 
-  useEffect(() => {
-    dispatch(setTheme('dark'));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>

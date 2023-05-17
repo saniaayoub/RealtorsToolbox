@@ -39,7 +39,7 @@ const ForgetPass = ({navigation}) => {
   const [validEmail, setValidEmail] = useState('');
   const [loader, setLoader] = useState(false);
   const theme = useSelector(state => state.reducer.theme);
-  const Textcolor = theme === 'dark' ? '#fff' : '#222222';
+  const Textcolor = '#fff';
   useEffect(() => {}, []);
 
   return (
