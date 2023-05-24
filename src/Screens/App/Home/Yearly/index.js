@@ -85,7 +85,7 @@ const Yearly = ({navigation}) => {
                       borderWidth={moderateScale(1, 0.1)}
                       borderBottomColor={'#d3d3d3'}
                       backgroundColor={backColor}
-                      marginLeft={moderateScale(120, 0.1)}
+                      marginLeft={moderateScale(110, 0.1)}
                       marginBottom={moderateScale(50, 0.1)}
                       borderColor={textColor}
                       trigger={triggerProps => {

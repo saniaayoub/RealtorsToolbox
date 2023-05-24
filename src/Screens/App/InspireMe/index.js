@@ -65,7 +65,7 @@ const InspireMe = ({navigation}) => {
                 /> */}
                 <Image
                   source={VideoBack}
-                  resizeMode="contain"
+                  resizeMode="cover"
                   style={[s.backgroundVideo, {position: 'absolute'}]}
                 />
 

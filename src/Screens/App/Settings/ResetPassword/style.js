@@ -28,10 +28,12 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'column',
-    marginBottom: moderateScale(10, 0.1),
+    marginVertical: moderateScale(22, 0.1),
   },
   input: {
     marginBottom: moderateScale(20, 0.1),
+    alignSelf: 'center',
+    width: '90%',
   },
   inputText: {
     color: '#fff',

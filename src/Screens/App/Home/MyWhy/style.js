@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: moderateScale(10, 0.1),
+    paddingTop: 0,
+    paddingVertical: moderateScale(15, 0.1),
+    // backgroundColor: 'red',
   },
   headingText: {
     fontSize: moderateScale(18, 0.1),

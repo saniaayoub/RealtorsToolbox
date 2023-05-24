@@ -49,9 +49,6 @@ const ResetPassword = ({navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[{backgroundColor: backColor}]}>
-        <View>
-          <HeaderTabs navigation={navigation} />
-        </View>
         <View style={[s.heading, {borderBottomColor: textColor}]}>
           <Text style={[s.headingText, {color: textColor}]}>
             Reset Password

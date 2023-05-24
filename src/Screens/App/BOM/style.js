@@ -42,14 +42,16 @@ const styles = StyleSheet.create({
   },
   col1: {
     flex: 0.5,
+    justifyContent: 'space-between',
+    paddingHorizontal: moderateScale(6, 0.1),
   },
   center: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   img: {
-    width: moderateScale(190, 0.1),
-    height: moderateScale(260, 0.1),
+    width: moderateScale(150, 0.1),
+    height: moderateScale(240, 0.1),
   },
   book: {width: '100%', height: '100%'},
   bookTitle: {
@@ -106,10 +108,10 @@ const styles = StyleSheet.create({
     right: moderateScale(-50, 0.1),
   },
   icons: {
-    marginTop: moderateScale(10, 0.1),
-    marginLeft: moderateScale(-10, 0.1),
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    // top: moderateScale(7, 0.1),
+    // marginLeft: moderateScale(-10, 0.1),
+    // alignItems: 'center',
+    justifyContent: 'center',
   },
   share: {
     width: moderateScale(33, 0.1),

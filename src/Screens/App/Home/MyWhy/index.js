@@ -52,7 +52,14 @@ const MyWhy = ({navigation}) => {
         <View>
           <Image source={HomeImg} resizeMode="cover" style={s.backImg} />
         </View>
-        <View style={[s.btnView, {marginVertical: moderateScale(50, 0.1)}]}>
+        <View
+          style={[
+            s.btnView,
+            {
+              marginVertical: moderateScale(50, 0.1),
+              bottom: moderateScale(-10, 0.1),
+            },
+          ]}>
           <Button
             size="sm"
             onPressIn={async () => {

@@ -35,10 +35,8 @@ const Form = [
   {title: 'Contact No'},
   {title: 'Address'},
   {title: 'Type Of Appointment'},
-  {title: 'Client Name'},
   {title: 'Date'},
   {title: 'Time'},
-  {title: 'Address'},
   {title: 'No. of Properties'},
   {title: 'No. of Bookings'},
   {title: 'Gender'},
@@ -178,7 +176,7 @@ const AddAppointment = ({navigation}) => {
               return (
                 <View>
                   <Menu
-                    style={{width: '100%'}}
+                    style={{width: '80%', left: moderateScale(90, 0.1)}}
                     borderWidth={moderateScale(1, 0.1)}
                     borderBottomColor={'#d3d3d3'}
                     backgroundColor={backColor}

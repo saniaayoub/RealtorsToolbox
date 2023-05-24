@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    marginVertical: moderateScale(10, 0.1),
+    marginTop: moderateScale(10, 0.1),
   },
   item: {
     width: '30%',

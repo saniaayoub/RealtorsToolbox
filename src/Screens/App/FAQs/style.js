@@ -27,12 +27,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: moderateScale(20, 0.1),
-    marginBottom: moderateScale(10, 0.1),
+    marginVertical: moderateScale(22, 0.1),
+    // marginBottom: moderateScale(10, 0.1),
     borderBottomWidth: moderateScale(1, 0.1),
   },
   headingText: {
     fontSize: moderateScale(18, 0.1),
+    paddingBottom: moderateScale(9, 0.1),
     fontFamily: MonteseratBold,
   },
   textRegular: {

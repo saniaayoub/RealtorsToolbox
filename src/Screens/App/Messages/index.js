@@ -88,8 +88,16 @@ const Messages = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[{backgroundColor: backColor}]}>
         <View style={s.headingView}>
-          <View style={[s.heading, {borderBottomColor: textColor}]}>
-            <Text style={[s.headingText, {color: textColor}]}>Messages</Text>
+          <View style={[s.heading]}>
+            <Text
+              style={[
+                s.headingText,
+                {
+                  color: textColor,
+                },
+              ]}>
+              Messages
+            </Text>
           </View>
           <TouchableOpacity
             onPress={() => {

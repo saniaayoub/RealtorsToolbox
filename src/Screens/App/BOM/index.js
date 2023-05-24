@@ -55,7 +55,7 @@ const BookoftheMonth = ({navigation}) => {
             Book Of The Month
           </Text>
         </View>
-        <View style={s.row}>
+        <View style={[s.row, {marginVertical: moderateScale(15, 0.1)}]}>
           <View style={[s.col1, s.img]}>
             <Image source={Book} resizeMode="cover" style={s.book} />
           </View>

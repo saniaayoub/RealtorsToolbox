@@ -52,14 +52,6 @@ const messages = [
     text: ' Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.',
     userImage: require('../../../../assets/images/png/dummyImg2.png'),
   },
-  {
-    uid: 2,
-    from: 'Julie Watson',
-    to: '',
-    date: '',
-    text: ' Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.',
-    userImage: require('../../../../assets/images/png/dummyImg1.png'),
-  },
 ];
 
 const Chat = ({navigation, route}) => {

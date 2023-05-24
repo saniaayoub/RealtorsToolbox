@@ -11,9 +11,10 @@ const MonteseratLight = 'Montserrat-Light';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    paddingHorizontal: moderateScale(15, 0.1),
   },
   tabs: {
-    paddingHorizontal: moderateScale(15, 0.1),
+    // paddingHorizontal: moderateScale(15, 0.1),
   },
   headingView: {
     flexDirection: 'row',
@@ -22,14 +23,13 @@ const styles = StyleSheet.create({
   },
   heading: {
     width: '50%',
-
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: moderateScale(20, 0.1),
-    marginBottom: moderateScale(10, 0.1),
-    borderBottomWidth: moderateScale(1, 0.1),
+    marginVertical: moderateScale(20, 0.1),
+    // marginBottom: moderateScale(10, 0.1),
   },
   headingText: {
+    // paddingBottom: moderateScale(9, 0.1),
     fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
   },
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: moderateScale(0.5, 0.1),
   },
   dp: {
-    marginRight: moderateScale(10, 0.1),
+    marginRight: moderateScale(12, 0.1),
     width: moderateScale(50, 0.1),
     height: moderateScale(50, 0.1),
   },

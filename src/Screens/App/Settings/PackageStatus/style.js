@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: moderateScale(10, 0.1),
+    marginVertical: moderateScale(18, 0.1),
     marginBottom: moderateScale(15, 0.1),
   },
   row: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   headingText1: {
     flex: 0.25,
-    fontSize: moderateScale(14, 0.1),
+    fontSize: moderateScale(12, 0.1),
     fontFamily: MonteseratLight,
   },
 });
