@@ -22,7 +22,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {setTheme, setUserToken} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
-import Edit from 'react-native-vector-icons/Entypo';
+import Edit from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import PhoneInput from 'react-native-phone-input';
 import DatePicker from 'react-native-date-picker';
@@ -109,8 +109,8 @@ const UserProfile = ({navigation}) => {
                 setShowCamera(true);
               }}>
               <Edit
-                name={'edit'}
-                size={moderateScale(10, 0.1)}
+                name={'account-edit'}
+                size={moderateScale(20, 0.1)}
                 color={'#fff'}
               />
             </TouchableOpacity>
@@ -145,9 +145,9 @@ const UserProfile = ({navigation}) => {
                   }}
                   style={s.iconCircle}>
                   <Edit
-                    name={'edit'}
+                    name={'account-edit'}
                     color={textColor}
-                    size={moderateScale(12, 0.1)}
+                    size={moderateScale(20, 0.1)}
                   />
                 </TouchableOpacity>
               }
@@ -179,9 +179,9 @@ const UserProfile = ({navigation}) => {
                   }}
                   style={s.iconCircle}>
                   <Edit
-                    name={'edit'}
+                    name={'account-edit'}
                     color={textColor}
-                    size={moderateScale(12, 0.1)}
+                    size={moderateScale(20, 0.1)}
                   />
                 </TouchableOpacity>
               }
@@ -212,9 +212,9 @@ const UserProfile = ({navigation}) => {
                   }}
                   style={s.iconCircle}>
                   <Edit
-                    name={'edit'}
+                    name={'account-edit'}
                     color={textColor}
-                    size={moderateScale(12, 0.1)}
+                    size={moderateScale(20, 0.1)}
                   />
                 </TouchableOpacity>
               }
@@ -303,9 +303,9 @@ const UserProfile = ({navigation}) => {
                 }
               }}>
               <Edit
-                name={'edit'}
+                name={'account-edit'}
                 color={textColor}
-                size={moderateScale(12, 0.1)}
+                size={moderateScale(20, 0.1)}
               />
             </TouchableOpacity>
           </View>
@@ -334,9 +334,9 @@ const UserProfile = ({navigation}) => {
                   }}
                   style={s.iconCircle}>
                   <Edit
-                    name={'edit'}
+                    name={'account-edit'}
                     color={textColor}
-                    size={moderateScale(12, 0.1)}
+                    size={moderateScale(20, 0.1)}
                   />
                 </TouchableOpacity>
               }

@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
 
   menuItem: {
-    width: moderateScale(150, 0.1),
+    width: moderateScale(146, 0.1),
   },
   btn: {
     marginTop: moderateScale(40, 0.1),

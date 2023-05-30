@@ -54,9 +54,9 @@ const Yearly = ({navigation}) => {
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   const [year, setYear] = useState(null);
 
-  useEffect(() => {
-    dispatch(setTheme('darks'));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setTheme('darks'));
+  // }, []);
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>

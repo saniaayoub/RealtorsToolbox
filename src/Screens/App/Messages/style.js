@@ -25,12 +25,12 @@ const styles = StyleSheet.create({
     width: '50%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: moderateScale(20, 0.1),
+    marginVertical: moderateScale(10, 0.1),
+    paddingBottom: moderateScale(9, 0.1),
     // marginBottom: moderateScale(10, 0.1),
   },
   headingText: {
-    // paddingBottom: moderateScale(9, 0.1),
-    fontSize: moderateScale(18, 0.1),
+    fontSize: moderateScale(20, 0.1),
     fontFamily: MonteseratBold,
   },
   newChat: {

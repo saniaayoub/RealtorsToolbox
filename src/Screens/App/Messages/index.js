@@ -112,7 +112,7 @@ const Messages = ({navigation}) => {
             />
             <Event
               name="edit"
-              color={'#000'}
+              color={backColor}
               solid
               size={moderateScale(12, 0.1)}
               style={[

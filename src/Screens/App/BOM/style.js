@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: moderateScale(10, 0.1),
+    marginTop: moderateScale(15, 0.1),
   },
   headingText: {
     fontSize: moderateScale(12, 0.1),

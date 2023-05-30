@@ -28,43 +28,43 @@ const NotificationList = [
   {
     name: 'John Smith',
     time: '4 Hours ago',
-    text: 'who you might know is on Profile',
+    text: 'who you might know ',
     image: dummyImg1,
   },
   {
     name: 'Julie Watson',
     time: '4 Hours ago',
-    text: 'who you might know is on Profile',
+    text: 'who you might know ',
     image: dummyImg2,
   },
   {
     name: 'John Smith',
     time: '4 Hours ago',
-    text: 'who you might know is on Profile',
+    text: 'who you might know ',
     image: dummyImg1,
   },
   {
     name: 'John Smith',
     time: '4 Hours ago',
-    text: 'who you might know is on Profile',
+    text: 'who you might know ',
     image: dummyImg2,
   },
   {
     name: 'John Smith',
     time: '4 Hours ago',
-    text: 'who you might know is on Profile',
+    text: 'who you might know ',
     image: dummyImg1,
   },
   {
     name: 'John Smith',
     time: '4 Hours ago',
-    text: 'who you might know is on Profile',
+    text: 'who you might know ',
     image: dummyImg1,
   },
   {
     name: 'John Smith',
     time: '4 Hours ago',
-    text: 'who you might know is on Profile',
+    text: 'who you might know ',
     image: dummyImg2,
   },
 ];
@@ -113,7 +113,11 @@ const Notifications = ({navigation}) => {
                       {item?.name}
                       {', '}
                     </Text>
-                    <Text style={[s.textRegular, {color: textColor}]}>
+                    <Text
+                      style={[
+                        s.textRegular,
+                        {color: textColor, width: moderateScale(230, 0.1)},
+                      ]}>
                       {item?.text}
                     </Text>
                   </View>

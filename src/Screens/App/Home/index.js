@@ -73,7 +73,11 @@ const Home = ({navigation}) => {
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={[s.mainContainer, {backgroundColor: backColor}]}>
-      <View style={[s.heading, {borderBottomColor: textColor}]}>
+      <View
+        style={[
+          s.heading,
+          {borderBottomColor: textColor, width: moderateScale(200, 0.1)},
+        ]}>
         <Text style={[s.headingText, {color: textColor}]}>Welcome To</Text>
         <Text style={[s.headingText1, {color: textColor}]}>
           Realtor’s Toolbox

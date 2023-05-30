@@ -97,7 +97,7 @@ const InspireMe = ({navigation}) => {
                   </View>
                 </Button>
 
-                <View style={[s.heading]}>
+                <View style={[s.heading, {paddingLeft: moderateScale(8, 0.1)}]}>
                   <Text
                     style={[s.headingText1, s.postText, {color: textColor}]}>
                     Your Dream Houses
