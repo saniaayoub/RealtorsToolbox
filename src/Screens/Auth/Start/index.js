@@ -39,7 +39,7 @@ const StartScreen = ({navigation}) => {
             end={{x: 1, y: 0}}> */}
           <View>
             <Text style={s.heading1}>Dream</Text>
-            <Text style={s.heading1}>Learn. Do</Text>
+            <Text style={s.heading1}>Learn Do</Text>
           </View>
           <View
             style={{

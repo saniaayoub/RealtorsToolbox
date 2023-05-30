@@ -61,6 +61,7 @@ const Chat = ({navigation, route}) => {
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   const uid = 1;
+  const [text, setText] = useState('');
 
   return (
     <SafeAreaView
