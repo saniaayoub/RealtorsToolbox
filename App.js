@@ -10,6 +10,7 @@ import {setTheme, setUserToken, setExist} from './src/Redux/actions';
 import {TextInput} from 'react-native-gesture-handler';
 import AuthStack from './src/Navigation/Stacks/AuthStack';
 import BottomTabs from './src/Navigation/BottomTabs';
+import RNBootSplash from 'react-native-bootsplash';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,16 +18,14 @@ const App = () => {
   const theme = useSelector(state => state.reducer.theme);
 
   useEffect(() => {
-    // const init = async () => {
-    //   // …do multiple sync or async task
-    //   getToken();
-    // };
-    // init().finally(async () => {
-    //   if (Platform.OS == 'ios') {
-    //     await RNBootSplash.hide({fade: true, duration: 500});
-    //   }
-    //   console.log('Bootsplash has been hidden successfully');
-    // });
+    const init = async () => {
+      // …do multiple sync or async tasks
+    };
+
+    init().finally(async () => {
+      await RNBootSplash.hide({fade: true, duration: 500});
+      console.log('BootSplash has been hidden successfully');
+    });
   }, []);
 
   const getToken = async () => {
