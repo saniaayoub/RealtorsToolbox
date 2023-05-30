@@ -12,7 +12,7 @@ import {
 import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
-import {Input, Button} from 'native-base';
+import {Input, Button, Modal} from 'native-base';
 import {moderateScale} from 'react-native-size-matters';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import backImg from '../../../assets/images/png/backImg1.png';
@@ -37,25 +37,34 @@ const StartScreen = ({navigation}) => {
             colors={['#FFC371', '#FF5F6D']}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 0}}> */}
-          <Text style={s.heading1}>Dream. Learn. Do</Text>
-          <Button
-            size="sm"
-            onPressIn={async () => {
-              navigation.navigate('Login');
-            }}
-            variant={'solid'}
-            style={s.btn}>
-            <View style={s.btnView}>
-              <Text style={s.btnText}>Get Started</Text>
-              <View style={s.roundIcon}>
-                <Icon
-                  name="arrowright"
-                  size={moderateScale(20, 0.1)}
-                  color={'#000'}
-                />
+          <View>
+            <Text style={s.heading1}>Dream</Text>
+            <Text style={s.heading1}>Learn. Do</Text>
+          </View>
+          <View
+            style={{
+              paddingBottom: moderateScale(12, 0.1),
+            }}>
+            <Button
+              size="sm"
+              onPressIn={async () => {
+                navigation.navigate('Login');
+              }}
+              variant={'solid'}
+              style={s.btn}>
+              <View style={s.btnView}>
+                <Text style={s.btnText}>Get Started</Text>
+                <View style={s.roundIcon}>
+                  <Icon
+                    name="arrowright"
+                    size={moderateScale(20, 0.1)}
+                    color={'#000'}
+                  />
+                </View>
               </View>
-            </View>
-          </Button>
+            </Button>
+          </View>
+
           {/* </LinearGradient> */}
         </View>
       </ImageBackground>

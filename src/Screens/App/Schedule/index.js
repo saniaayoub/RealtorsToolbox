@@ -23,31 +23,35 @@ import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Header from '../../../Components/header';
 import Plus from 'react-native-vector-icons/AntDesign';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar, LocaleConfig, Agenda} from 'react-native-calendars';
 
 const Schedule = ({navigation}) => {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
-  const marked = {
-    '2023-05-15': {
-      // marked: true,
-      selected: true,
-      disableTouchEvent: true,
-    },
-    '2023-05-19': {
-      // marked: true,
-      selected: true,
-      disableTouchEvent: true,
-    },
-    '2023-06-20': {
-      // marked: true,
-      selected: true,
-      disableTouchEvent: true,
-    },
-  };
+  // const marked = {
+  //   '2023-05-15': {
+  //     // marked: true,
+  //     selected: true,
+  //     disableTouchEvent: true,
+  //   },
+  //   '2023-05-19': {
+  //     // marked: true,
+  //     selected: true,
+  //     disableTouchEvent: true,
+  //   },
+  //   '2023-06-20': {
+  //     // marked: true,
+  //     selected: true,
+  //     disableTouchEvent: true,
+  //   },
+  // };
   const [selected, setSelected] = useState('');
+  const [events, setEvents] = useState({
+    '2022-12-01': [{name: 'Cycling'}, {name: 'Walking'}, {name: 'Running'}],
+    '2022-12-02': [{name: 'Writing'}],
+  });
 
   useEffect(() => {}, []);
 
@@ -84,7 +88,7 @@ const Schedule = ({navigation}) => {
         </View>
 
         <View style={{flex: 1, backgroundColor: backColor}}>
-          <Calendar
+          {/* <Calendar
             onDayPress={day => {
               console.warn(day);
             }}
@@ -95,6 +99,26 @@ const Schedule = ({navigation}) => {
               textDisabledColor: '#444',
               monthTextColor: textColor,
               selectedDayBackgroundColor: '#FDBC2C',
+            }}
+          /> */}
+          <Calendar
+            onDayPress={day => {
+              setSelected(day.dateString);
+            }}
+            markedDates={{
+              [selected]: {
+                selected: true,
+                disableTouchEvent: true,
+              },
+            }}
+            theme={{
+              calendarBackground: backColor,
+              dayTextColor: textColor,
+              textDisabledColor: '#444',
+              monthTextColor: textColor,
+              selectedDayBackgroundColor: '#FDBC2C',
+              arrowColor: '#FDBC2C',
+              todayTextColor: '#FDBC2C',
             }}
           />
           {/* <Agenda

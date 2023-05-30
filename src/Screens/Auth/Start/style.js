@@ -30,8 +30,12 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     borderWidth: moderateScale(1, 0.1),
     borderRadius: moderateScale(25, 0.1),
-    paddingLeft: moderateScale(15, 0.1),
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    paddingVertical: moderateScale(22, 0.1),
+    paddingHorizontal: moderateScale(22, 0.1),
+
+    // paddingLeft: moderateScale(15, 0.1),
+    // justifyContent: 'space-around',
   },
   btnText: {
     color: '#fff',
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
   btnView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
 });
 
