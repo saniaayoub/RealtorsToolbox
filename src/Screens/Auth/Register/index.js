@@ -28,6 +28,7 @@ import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
 import RadioButton from '../../../Components/radio';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import {BlurView} from '@react-native-community/blur';
 
 const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passRegex = new RegExp(
@@ -53,6 +54,8 @@ const Register = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [submitted, setSubmitted] = useState();
   const [borderColor, setBorderColor] = useState('#d3d3d3');
+  const width = Dimensions.get('window').width;
+  const height = Dimensions.get('window').height;
 
   const Textcolor = '#fff';
 
@@ -88,267 +91,290 @@ const Register = ({navigation}) => {
         <View>
           <Header navigation={navigation} />
         </View>
-
-        <View style={s.blurContainer}>
-          {/* <LinearGradient
-            colors={['#FFC371', '#FF5F6D']}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}> */}
-          <View style={s.inputView}>
-            <View style={s.headingView}>
-              <Text style={s.heading1}>Create Your Account</Text>
-            </View>
-            <View style={s.input}>
-              <Input
-                w={{
-                  base: '83%',
-                  md: '25%',
-                }}
-                variant="underlined"
-                InputLeftElement={
-                  <View style={s.iconCircle}>
-                    <Icon
-                      name={'user'}
-                      color={Textcolor}
-                      size={moderateScale(19, 0.1)}
-                    />
-                  </View>
-                }
-                placeholder="Full Name"
-                placeholderTextColor={Textcolor}
-                value={fname}
-                onChangeText={text => {
-                  setFname(text);
-                  let valid = emailReg.test(text);
-                }}
-                style={s.inputText}
-              />
-            </View>
-            {submitted && (email == null || email == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
-                </View>
-              </>
-            ) : null}
-            <View style={s.input}>
-              <Input
-                w={{
-                  base: '83%',
-                  md: '25%',
-                }}
-                variant="underlined"
-                InputLeftElement={
-                  <View style={s.iconCircle}>
-                    <Icon1
-                      name={'email'}
-                      color={Textcolor}
-                      size={moderateScale(18, 0.1)}
-                    />
-                  </View>
-                }
-                placeholder="Email Address"
-                placeholderTextColor={Textcolor}
-                value={email}
-                keyboardType="email-address"
-                onChangeText={email => {
-                  setEmail(email);
-                  let valid = emailReg.test(email);
-                }}
-                style={s.inputText}
-              />
-            </View>
-            {submitted && (email == null || email == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
-                </View>
-              </>
-            ) : null}
-            <View
-              style={[
-                s.input,
-                s.inputContainerStyle,
-                {
-                  borderBottomColor: borderColor,
-                  borderBottomWidth: 1,
-                  // flexDirection: 'row',
-                },
-              ]}>
-              <PhoneInput
-                initialCountry={'us'}
-                textProps={{
-                  placeholder: 'Enter Phone Number',
-                  placeholderTextColor: Textcolor,
-                }}
-                autoFormat={true}
-                pickerBackgroundColor={'#000'}
-                textStyle={[s.inputStyle, {color: Textcolor}]}
-                isValidNumber={e => console.log(e, 'here')}
-                ref={phonenum}
-                onChangePhoneNumber={phNumber => {
-                  if (phonenum.current.isValidNumber()) {
-                    setBorderColor('#d3d3d3');
-                  } else {
-                    setBorderColor('red');
-                  }
-                }}
-              />
-            </View>
-            <View style={s.input}>
-              <Input
-                w={{
-                  base: '83%',
-                  md: '25%',
-                }}
-                variant="underlined"
-                InputLeftElement={
-                  <View style={[s.iconCircle, {borderColor: Textcolor}]}>
-                    <Icon2 name="locked" color={Textcolor} size={18} />
-                  </View>
-                }
-                placeholder="Password"
-                placeholderTextColor={Textcolor}
-                value={password}
-                onChangeText={password => {
-                  setPassword(password);
-                }}
-                InputRightElement={
-                  password ? (
-                    <View style={s.eye}>
-                      <TouchableOpacity onPress={() => setshowPass(!showPass)}>
-                        <Feather
-                          name={showPass ? 'eye' : 'eye-off'}
-                          color={Textcolor}
-                          size={20}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  ) : (
-                    <></>
-                  )
-                }
-                style={s.inputText}
-                secureTextEntry={showPass}
-              />
-            </View>
-            {submitted && (password == null || password == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
-                </View>
-              </>
-            ) : null}
-            <View style={s.input}>
-              <Input
-                w={{
-                  base: '83%',
-                  md: '25%',
-                }}
-                variant="underlined"
-                InputLeftElement={
-                  <View style={[s.iconCircle, {borderColor: Textcolor}]}>
-                    <Icon2 name="locked" color={Textcolor} size={18} />
-                  </View>
-                }
-                placeholder="Confirm Password"
-                placeholderTextColor={Textcolor}
-                value={confirmPassword}
-                onChangeText={password => {
-                  setConfirmPassword(password);
-                }}
-                InputRightElement={
-                  confirmPassword ? (
-                    <View style={s.eye}>
-                      <TouchableOpacity
-                        onPress={() => setShowConfPass(!showConfPass)}>
-                        <Feather
-                          name={showConfPass ? 'eye' : 'eye-off'}
-                          color={Textcolor}
-                          size={20}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  ) : (
-                    <></>
-                  )
-                }
-                style={s.inputText}
-                secureTextEntry={showConfPass}
-              />
-            </View>
-            {submitted && (confirmPassword == null || confirmPassword == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
-                </View>
-              </>
-            ) : null}
-
-            <View style={s.radioInput}>
-              <Text style={[s.btnText, {fontSize: moderateScale(14, 0.1)}]}>
-                Gender
-              </Text>
-              {isSelected.map((item, i) => (
-                <View style={s.radio}>
-                  <RadioButton
-                    onPress={() => onRadioBtnClick(item)}
-                    selected={item.selected}
-                    key={item.id}>
-                    {item.name}
-                  </RadioButton>
-                </View>
-              ))}
-            </View>
-            <Button
-              size="sm"
-              onPressIn={async () => {
-                navigation.navigate('Login');
-              }}
-              variant={'solid'}
-              style={s.btn}>
-              <View style={s.btnView}>
-                <Text style={s.btnText}>Register</Text>
+        <BlurView
+          blurAmount={15}
+          blurType="light"
+          style={{
+            width: 0.9 * width,
+            height: 0.85 * height,
+            borderColor: 'grey',
+            borderWidth: moderateScale(1, 0.1),
+            borderRadius: moderateScale(25, 0.1),
+            alignSelf: 'center',
+          }}>
+          <LinearGradient
+            colors={['rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)']}
+            start={{x: 0, y: 1}}
+            end={{x: 1, y: 1}}
+            useAngle
+            angle={110}
+            style={{
+              width: 0.9 * width,
+              height: 0.85 * height,
+              borderColor: 'gray',
+              borderWidth: 2,
+              borderRadius: 25,
+            }}>
+            {/* <View style={s.blurContainer}> */}
+            <View style={s.inputView}>
+              <View style={s.headingView}>
+                <Text style={s.heading1}>Create Your Account</Text>
               </View>
-            </Button>
-          </View>
-        </View>
+              <View style={s.input}>
+                <Input
+                  w={{
+                    base: '83%',
+                    md: '25%',
+                  }}
+                  variant="underlined"
+                  InputLeftElement={
+                    <View style={s.iconCircle}>
+                      <Icon
+                        name={'user'}
+                        color={Textcolor}
+                        size={moderateScale(19, 0.1)}
+                      />
+                    </View>
+                  }
+                  placeholder="Full Name"
+                  placeholderTextColor={Textcolor}
+                  value={fname}
+                  onChangeText={text => {
+                    setFname(text);
+                    let valid = emailReg.test(text);
+                  }}
+                  style={s.inputText}
+                />
+              </View>
+              {submitted && (email == null || email == '') ? (
+                <>
+                  <View
+                    style={{
+                      alignSelf: 'flex-end',
+                      marginRight: moderateScale(35, 0.1),
+                    }}>
+                    <Text
+                      style={{
+                        color: 'red',
+                      }}>
+                      Required
+                    </Text>
+                  </View>
+                </>
+              ) : null}
+              <View style={s.input}>
+                <Input
+                  w={{
+                    base: '83%',
+                    md: '25%',
+                  }}
+                  variant="underlined"
+                  InputLeftElement={
+                    <View style={s.iconCircle}>
+                      <Icon1
+                        name={'email'}
+                        color={Textcolor}
+                        size={moderateScale(18, 0.1)}
+                      />
+                    </View>
+                  }
+                  placeholder="Email Address"
+                  placeholderTextColor={Textcolor}
+                  value={email}
+                  keyboardType="email-address"
+                  onChangeText={email => {
+                    setEmail(email);
+                    let valid = emailReg.test(email);
+                  }}
+                  style={s.inputText}
+                />
+              </View>
+              {submitted && (email == null || email == '') ? (
+                <>
+                  <View
+                    style={{
+                      alignSelf: 'flex-end',
+                      marginRight: moderateScale(35, 0.1),
+                    }}>
+                    <Text
+                      style={{
+                        color: 'red',
+                      }}>
+                      Required
+                    </Text>
+                  </View>
+                </>
+              ) : null}
+              <View
+                style={[
+                  s.input,
+                  s.inputContainerStyle,
+                  {
+                    borderBottomColor: borderColor,
+                    borderBottomWidth: 1,
+                    // flexDirection: 'row',
+                  },
+                ]}>
+                <PhoneInput
+                  initialCountry={'us'}
+                  textProps={{
+                    placeholder: 'Enter Phone Number',
+                    placeholderTextColor: Textcolor,
+                  }}
+                  autoFormat={true}
+                  pickerBackgroundColor={'#000'}
+                  textStyle={[s.inputStyle, {color: Textcolor}]}
+                  isValidNumber={e => console.log(e, 'here')}
+                  ref={phonenum}
+                  onChangePhoneNumber={phNumber => {
+                    if (phonenum.current.isValidNumber()) {
+                      setBorderColor('#d3d3d3');
+                    } else {
+                      setBorderColor('red');
+                    }
+                  }}
+                />
+              </View>
+              <View style={s.input}>
+                <Input
+                  w={{
+                    base: '83%',
+                    md: '25%',
+                  }}
+                  variant="underlined"
+                  InputLeftElement={
+                    <View style={[s.iconCircle, {borderColor: Textcolor}]}>
+                      <Icon2 name="locked" color={Textcolor} size={18} />
+                    </View>
+                  }
+                  placeholder="Password"
+                  placeholderTextColor={Textcolor}
+                  value={password}
+                  onChangeText={password => {
+                    setPassword(password);
+                  }}
+                  InputRightElement={
+                    password ? (
+                      <View style={s.eye}>
+                        <TouchableOpacity
+                          onPress={() => setshowPass(!showPass)}>
+                          <Feather
+                            name={showPass ? 'eye' : 'eye-off'}
+                            color={Textcolor}
+                            size={20}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    ) : (
+                      <></>
+                    )
+                  }
+                  style={s.inputText}
+                  secureTextEntry={showPass}
+                />
+              </View>
+              {submitted && (password == null || password == '') ? (
+                <>
+                  <View
+                    style={{
+                      alignSelf: 'flex-end',
+                      marginRight: moderateScale(35, 0.1),
+                    }}>
+                    <Text
+                      style={{
+                        color: 'red',
+                      }}>
+                      Required
+                    </Text>
+                  </View>
+                </>
+              ) : null}
+              <View style={s.input}>
+                <Input
+                  w={{
+                    base: '83%',
+                    md: '25%',
+                  }}
+                  variant="underlined"
+                  InputLeftElement={
+                    <View style={[s.iconCircle, {borderColor: Textcolor}]}>
+                      <Icon2 name="locked" color={Textcolor} size={18} />
+                    </View>
+                  }
+                  placeholder="Confirm Password"
+                  placeholderTextColor={Textcolor}
+                  value={confirmPassword}
+                  onChangeText={password => {
+                    setConfirmPassword(password);
+                  }}
+                  InputRightElement={
+                    confirmPassword ? (
+                      <View style={s.eye}>
+                        <TouchableOpacity
+                          onPress={() => setShowConfPass(!showConfPass)}>
+                          <Feather
+                            name={showConfPass ? 'eye' : 'eye-off'}
+                            color={Textcolor}
+                            size={20}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    ) : (
+                      <></>
+                    )
+                  }
+                  style={s.inputText}
+                  secureTextEntry={showConfPass}
+                />
+              </View>
+              {submitted &&
+              (confirmPassword == null || confirmPassword == '') ? (
+                <>
+                  <View
+                    style={{
+                      alignSelf: 'flex-end',
+                      marginRight: moderateScale(35, 0.1),
+                    }}>
+                    <Text
+                      style={{
+                        color: 'red',
+                      }}>
+                      Required
+                    </Text>
+                  </View>
+                </>
+              ) : null}
+
+              <View style={s.radioInput}>
+                <Text style={[s.btnText, {fontSize: moderateScale(14, 0.1)}]}>
+                  Gender
+                </Text>
+                {isSelected.map((item, i) => (
+                  <View style={s.radio}>
+                    <RadioButton
+                      onPress={() => onRadioBtnClick(item)}
+                      selected={item.selected}
+                      key={item.id}>
+                      {item.name}
+                    </RadioButton>
+                  </View>
+                ))}
+              </View>
+              <Button
+                size="sm"
+                onPressIn={async () => {
+                  navigation.navigate('Login');
+                }}
+                variant={'solid'}
+                style={s.btn}>
+                <View style={s.btnView}>
+                  <Text style={s.btnText}>Register</Text>
+                </View>
+              </Button>
+            </View>
+            {/* </View */}
+          </LinearGradient>
+        </BlurView>
       </ImageBackground>
     </ScrollView>
   );

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headingView: {
-    marginVertical: moderateScale(50, 0.1),
+    marginVertical: moderateScale(40, 0.1),
   },
   btnText: {
     fontSize: moderateScale(15, 0.1),

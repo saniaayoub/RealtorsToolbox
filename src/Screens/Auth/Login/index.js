@@ -25,6 +25,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import {setUserToken} from '../../../Redux/actions';
+import {BlurView} from '@react-native-community/blur';
 
 const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passRegex = new RegExp(
@@ -41,7 +42,8 @@ const ForgetPass = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const theme = useSelector(state => state.reducer.theme);
   const Textcolor = theme === 'dark' ? '#fff' : '#222222';
-  useEffect(() => {}, []);
+  const width = Dimensions.get('window').width;
+  const height = Dimensions.get('window').height;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -49,145 +51,177 @@ const ForgetPass = ({navigation}) => {
         <View>
           <Header navigation={navigation} />
         </View>
+        <View style={{justifyContent: 'center'}}>
+          <BlurView
+            blurAmount={15}
+            blurType="light"
+            style={{
+              width: 0.9 * width,
+              height: 0.75 * height,
+              borderColor: 'grey',
+              borderWidth: moderateScale(1, 0.1),
+              borderRadius: moderateScale(25, 0.1),
+              alignSelf: 'center',
+              // paddingLeft: moderateScale(15, 0.1),
+              // justifyContent: 'space-around',
+              // alignContent: 'flex-start',
+              // alignItems: 'center',
+            }}>
+            <LinearGradient
+              colors={['rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)']}
+              start={{x: 0, y: 1}}
+              end={{x: 1, y: 1}}
+              useAngle
+              angle={110}
+              style={{
+                width: 0.9 * width,
+                height: 0.75 * height,
+                borderColor: 'gray',
+                borderWidth: 2,
+                borderRadius: 25,
+                // justifyContent: 'space-between',
+                // paddingVertical: moderateScale(30, 0.1),
+                // paddingHorizontal: moderateScale(22, 0.1),
+              }}>
+              {/* <View style={s.blurContainer}> */}
 
-        <View style={s.blurContainer}>
-          {/* <LinearGradient
-            colors={['#FFC371', '#FF5F6D']}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}> */}
-          <View style={s.inputView}>
-            <View style={s.headingView}>
-              <Text style={s.heading1}>Sign In</Text>
-            </View>
-            <View style={s.input}>
-              <Input
-                w={{
-                  base: '83%',
-                  md: '25%',
-                }}
-                variant="underlined"
-                InputLeftElement={
-                  <View style={s.iconCircle}>
-                    <Icon name={'envelope'} color={'#fff'} size={18} />
-                  </View>
-                }
-                placeholder="Email Address"
-                placeholderTextColor={'#fff'}
-                value={email}
-                keyboardType="email-address"
-                onChangeText={email => {
-                  setEmail(email);
-                  let valid = emailReg.test(email);
-                }}
-                style={s.inputText}
-              />
-            </View>
-            {submitted && (email == null || email == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
-                  </Text>
+              <View style={s.inputView}>
+                <View style={s.headingView}>
+                  <Text style={s.heading1}>Sign In</Text>
                 </View>
-              </>
-            ) : null}
-            <View style={s.input}>
-              <Input
-                w={{
-                  base: '83%',
-                  md: '25%',
-                }}
-                variant="underlined"
-                InputLeftElement={
-                  <View style={[s.iconCircle, {borderColor: '#fff'}]}>
-                    <Icon2 name="locked" color={'#fff'} size={18} />
-                  </View>
-                }
-                placeholder="Password"
-                placeholderTextColor={'#fff'}
-                value={password}
-                onChangeText={password => {
-                  setPassword(password);
-                }}
-                InputRightElement={
-                  password ? (
-                    <View style={s.eye}>
-                      <TouchableOpacity onPress={() => setshowPass(!showPass)}>
-                        <Feather
-                          name={showPass ? 'eye' : 'eye-off'}
-                          color={'#fff'}
-                          size={moderateScale(20, 0.1)}
-                        />
-                      </TouchableOpacity>
+                <View style={s.input}>
+                  <Input
+                    w={{
+                      base: '83%',
+                      md: '25%',
+                    }}
+                    variant="underlined"
+                    InputLeftElement={
+                      <View style={s.iconCircle}>
+                        <Icon name={'envelope'} color={'#fff'} size={18} />
+                      </View>
+                    }
+                    placeholder="Email Address"
+                    placeholderTextColor={'#fff'}
+                    value={email}
+                    keyboardType="email-address"
+                    onChangeText={email => {
+                      setEmail(email);
+                      let valid = emailReg.test(email);
+                    }}
+                    style={s.inputText}
+                  />
+                </View>
+                {submitted && (email == null || email == '') ? (
+                  <>
+                    <View
+                      style={{
+                        alignSelf: 'flex-end',
+                        marginRight: moderateScale(35, 0.1),
+                      }}>
+                      <Text
+                        style={{
+                          color: 'red',
+                        }}>
+                        Required
+                      </Text>
                     </View>
-                  ) : (
-                    <></>
-                  )
-                }
-                style={s.inputText}
-                secureTextEntry={showPass}
-              />
-            </View>
-            {submitted && (password == null || password == '') ? (
-              <>
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    marginRight: moderateScale(35, 0.1),
-                  }}>
-                  <Text
-                    style={{
-                      color: 'red',
-                    }}>
-                    Required
+                  </>
+                ) : null}
+                <View style={s.input}>
+                  <Input
+                    w={{
+                      base: '83%',
+                      md: '25%',
+                    }}
+                    variant="underlined"
+                    InputLeftElement={
+                      <View style={[s.iconCircle, {borderColor: '#fff'}]}>
+                        <Icon2 name="locked" color={'#fff'} size={18} />
+                      </View>
+                    }
+                    placeholder="Password"
+                    placeholderTextColor={'#fff'}
+                    value={password}
+                    onChangeText={password => {
+                      setPassword(password);
+                    }}
+                    InputRightElement={
+                      password ? (
+                        <View style={s.eye}>
+                          <TouchableOpacity
+                            onPress={() => setshowPass(!showPass)}>
+                            <Feather
+                              name={showPass ? 'eye' : 'eye-off'}
+                              color={'#fff'}
+                              size={moderateScale(20, 0.1)}
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      ) : (
+                        <></>
+                      )
+                    }
+                    style={s.inputText}
+                    secureTextEntry={showPass}
+                  />
+                </View>
+                {submitted && (password == null || password == '') ? (
+                  <>
+                    <View
+                      style={{
+                        alignSelf: 'flex-end',
+                        marginRight: moderateScale(35, 0.1),
+                      }}>
+                      <Text
+                        style={{
+                          color: 'red',
+                        }}>
+                        Required
+                      </Text>
+                    </View>
+                  </>
+                ) : null}
+
+                <Button
+                  size="sm"
+                  onPressIn={async () => {
+                    dispatch(setUserToken('abc'));
+                  }}
+                  variant={'solid'}
+                  style={s.btn}>
+                  <View style={s.btnView}>
+                    <Text style={s.btnText}>Login</Text>
+                  </View>
+                </Button>
+
+                <Button
+                  size="md"
+                  variant={'link'}
+                  onPressIn={() => navigation.navigate('ForgetPass')}>
+                  <Text style={[s.btnText, s.btnText2, s.btnText3]}>
+                    Forgot Password?
+                  </Text>
+                </Button>
+              </View>
+
+              <Button
+                size="sm"
+                variant={'link'}
+                onPressIn={() => navigation.navigate('Register')}>
+                <View style={[s.link]}>
+                  <Text style={[s.btnText, s.btnText2]}>
+                    Don’t Have an Account?
+                  </Text>
+                  <Text style={[s.btnText, s.btnText2, s.btnText3]}>
+                    {' '}
+                    Sign up Now!
                   </Text>
                 </View>
-              </>
-            ) : null}
-
-            <Button
-              size="sm"
-              onPressIn={async () => {
-                dispatch(setUserToken('sania'));
-              }}
-              variant={'solid'}
-              style={s.btn}>
-              <View style={s.btnView}>
-                <Text style={s.btnText}>Login</Text>
-              </View>
-            </Button>
-
-            <Button
-              size="md"
-              variant={'link'}
-              onPressIn={() => navigation.navigate('ForgetPass')}>
-              <Text style={[s.btnText, s.btnText2, s.btnText3]}>
-                Forgot Password?
-              </Text>
-            </Button>
-          </View>
-
-          <Button
-            size="sm"
-            variant={'link'}
-            onPressIn={() => navigation.navigate('Register')}>
-            <View style={s.link}>
-              <Text style={[s.btnText, s.btnText2]}>
-                Don’t Have an Account?
-              </Text>
-              <Text style={[s.btnText, s.btnText2, s.btnText3]}>
-                {' '}
-                Sign up Now!
-              </Text>
-            </View>
-          </Button>
+              </Button>
+              {/* </View>  */}
+            </LinearGradient>
+          </BlurView>
         </View>
       </ImageBackground>
     </ScrollView>

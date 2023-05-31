@@ -11,12 +11,25 @@ const MonteseratRegular = 'Montserrat-Regular';
 const styles = StyleSheet.create({
   sav: {
     flex: 1,
-    height: '100%',
+    // height: '100%',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 1)', // Set the desired opacity value here
+    opacity: 0.7,
   },
   backImg: {
-    justifyContent: 'center',
+    flex: 1,
+    resizeMode: 'cover',
+    backgroundColor: 'black',
+    opacity: 0.9,
+    // justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+    width: undefined,
+    zIndex: -100,
+    // zIndex: 1,
+    // minHeight: '100%',
     justifyContent: 'space-around',
   },
   logo: {
@@ -26,16 +39,20 @@ const styles = StyleSheet.create({
   blurContainer: {
     width: 0.8 * width,
     height: 0.3 * height,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    // alignItems: 'flex-start',
+    // backgroundColor: 'rgba(0,0,0,0.5)',
+    // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+
+    // overflow: 'hidden',
     borderColor: 'grey',
     borderWidth: moderateScale(1, 0.1),
     borderRadius: moderateScale(25, 0.1),
     justifyContent: 'space-between',
-    paddingVertical: moderateScale(22, 0.1),
-    paddingHorizontal: moderateScale(22, 0.1),
+    // paddingVertical: moderateScale(22, 0.1),
+    // paddingHorizontal: moderateScale(22, 0.1),
 
     // paddingLeft: moderateScale(15, 0.1),
-    // justifyContent: 'space-around',
+    justifyContent: 'space-around',
   },
   btnText: {
     color: '#fff',
