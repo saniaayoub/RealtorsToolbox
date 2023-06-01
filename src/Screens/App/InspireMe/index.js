@@ -25,17 +25,18 @@ import Heart from 'react-native-vector-icons/MaterialCommunityIcons';
 import Share from 'react-native-vector-icons/FontAwesome';
 import VideoBack from '../../../assets/images/png/videoBack.png';
 import Videomp4 from '../../../assets/video/video.mp4';
-import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-player';
+// import Orientation from 'react-native-orientation';
 
 const InspireMe = ({navigation}) => {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const [isMuted, setIsMuted] = React.useState(false);
-
-  useEffect(() => {}, []);
+  const [like, setLike] = useState(false);
+  const [video, setVideo] = useState({
+    uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+  });
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
@@ -52,85 +53,70 @@ const InspireMe = ({navigation}) => {
         </View>
 
         <View style={s.videos}>
-          {[1, 2, 3].map((item, index) => (
-            <View key={index}>
-              <View style={s.backgroundVideo}>
-                {/* <Video
-                  source={Videomp4}
-                  paused={!isPlaying}
-                  controls={true}
-                  style={s.video}
-                  // style={s.backgroundVideo}
-                  muted={isMuted}
-                /> */}
-                <Image
-                  source={VideoBack}
-                  resizeMode="cover"
-                  style={[s.backgroundVideo, {position: 'absolute'}]}
-                />
+          {[1, 2, 3].map((v, i) => {
+            return (
+              <View key={i}>
+                <View style={s.backgroundVideo}>
+                  <VideoPlayer
+                    video={video}
+                    thumbnail={{
+                      uri: 'https://i.picsum.photos/id/866/1600/900.jpg',
+                    }}
+                    style={{
+                      backgroundColor: '#000',
+                      borderRadius: moderateScale(14, 0.1),
+                    }}
+                    resizeMode="cover"
+                    customStyles={{
+                      controlBar: {
+                        backgroundColor: '#B6B6B6',
+                        borderRadius: 10,
+                      },
 
-                <Button
-                  size="sm"
-                  variant={'link'}
-                  onPress={() => console.log('heart')}>
-                  <View style={s.heart}>
+                      video: {
+                        display: 'flex',
+                        borderRadius: moderateScale(14, 0.1),
+                      },
+                    }}
+                  />
+                  <TouchableOpacity
+                    onPress={() => setLike(!like)}
+                    style={s.heart}>
                     <Heart
                       name="heart-circle"
-                      size={moderateScale(40, 0.1)}
-                      color={'#FDBC2C'}
-                      solid
-                      style={s.heartIcon}
+                      size={moderateScale(30, 0.1)}
+                      color={like == false ? '#FDBC2C' : 'red'}
+                      // solid
+                      // style={s.heartIcon}
                     />
-                  </View>
-                </Button>
-                <Button
-                  size="sm"
-                  variant={'link'}
-                  onPress={() => setIsPlaying(m => !m)}>
-                  <View>
-                    <Play
-                      name="play-circle"
-                      size={moderateScale(60, 0.1)}
-                      color={'#fff'}
-                      solid
-                    />
-                  </View>
-                </Button>
-
-                <View style={[s.heading, {paddingLeft: moderateScale(8, 0.1)}]}>
-                  <Text
-                    style={[s.headingText1, s.postText, {color: textColor}]}>
-                    Your Dream Houses
-                  </Text>
-                </View>
-                <Button
-                  size="sm"
-                  variant={'link'}
-                  onPress={() => console.log('share')}>
-                  <View style={[s.share]}>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    // onPress={() => setLike(!like)}
+                    style={s.share}>
                     <Share
                       name="share-square-o"
                       size={moderateScale(20, 0.1)}
-                      color={'#fff'}
-                      solid
-                      style={s.heartIcon}
+                      color="#FDBC2C"
+                      // solid
+                      // style={s.heartIcon}
                     />
-                  </View>
-                </Button>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <Text style={[s.caption, {color: textColor}]}>
+                    is simply dummy text of the printing and typesetting
+                    industry. Lorem Ipsum has been the industry's standard
+                    dummy.is simply dummy text of the printing and typesetting
+                    industry. Lorem Ipsum has been the industry's standard
+                    dummy.
+                  </Text>
+                </View>
+                <View>
+                  <Text style={s.datePosted}>Posted On 14-Sep-2022</Text>
+                </View>
               </View>
-              <View>
-                <Text style={[s.caption, {color: textColor}]}>
-                  is simply dummy text of the printing and typesetting industry.
-                  Lorem Ipsum has been the industry's standard dummy.is simply
-                  dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy.
-                </Text>
-              </View>
-              <View>
-                <Text style={s.datePosted}>Posted On 14-Sep-2022</Text>
-              </View>
-            </View>
-          ))}
+            );
+          })}
         </View>
       </ScrollView>
     </View>

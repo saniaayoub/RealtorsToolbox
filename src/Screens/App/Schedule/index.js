@@ -29,7 +29,7 @@ const Schedule = ({navigation}) => {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const backColor = theme === 'dark' ? '#232323' : 'white';
   // const marked = {
   //   '2023-05-15': {
   //     // marked: true,
@@ -87,7 +87,7 @@ const Schedule = ({navigation}) => {
           </Button>
         </View>
 
-        <View style={{flex: 1, backgroundColor: backColor}}>
+        <View style={{flex: 1}}>
           {/* <Calendar
             onDayPress={day => {
               console.warn(day);

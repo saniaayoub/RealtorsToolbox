@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   heading1: {
     fontFamily: MonteseratBold,
-    fontSize: moderateScale(28, 0.1),
+    fontSize: moderateScale(27, 0.1),
     color: '#fff',
   },
   btnText2: {

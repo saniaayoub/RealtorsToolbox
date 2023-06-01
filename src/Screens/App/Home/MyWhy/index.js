@@ -8,7 +8,7 @@ import {setTheme} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import HomeImg from '../../../../assets/images/png/homeImg.png';
-import Graph from '../../../../assets/images/png/Graph.png';
+import Graph from '../../../../Components/Graph';
 import Plus from 'react-native-vector-icons/AntDesign';
 import ImagePicker from '../../../../Components/imagePickerModal';
 
@@ -83,9 +83,8 @@ const MyWhy = ({navigation}) => {
             </Text>
           </Button>
         </View>
-        <View style={s.graphView}>
-          <Image source={Graph} resizeMode="contain" style={s.graph} />
-        </View>
+
+        <Graph />
         <ImagePicker
           modalVisible={showCamera}
           setModalVisible={setShowCamera}

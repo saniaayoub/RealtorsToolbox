@@ -62,10 +62,6 @@ const ForgetPass = ({navigation}) => {
               borderWidth: moderateScale(1, 0.1),
               borderRadius: moderateScale(25, 0.1),
               alignSelf: 'center',
-              // paddingLeft: moderateScale(15, 0.1),
-              // justifyContent: 'space-around',
-              // alignContent: 'flex-start',
-              // alignItems: 'center',
             }}>
             <LinearGradient
               colors={['rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)']}
@@ -79,12 +75,7 @@ const ForgetPass = ({navigation}) => {
                 borderColor: 'gray',
                 borderWidth: 2,
                 borderRadius: 25,
-                // justifyContent: 'space-between',
-                // paddingVertical: moderateScale(30, 0.1),
-                // paddingHorizontal: moderateScale(22, 0.1),
               }}>
-              {/* <View style={s.blurContainer}> */}
-
               <View style={s.inputView}>
                 <View style={s.headingView}>
                   <Text style={s.heading1}>Sign In</Text>
@@ -219,7 +210,6 @@ const ForgetPass = ({navigation}) => {
                   </Text>
                 </View>
               </Button>
-              {/* </View>  */}
             </LinearGradient>
           </BlurView>
         </View>

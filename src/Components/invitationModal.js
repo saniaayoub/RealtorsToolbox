@@ -119,8 +119,8 @@ const s = StyleSheet.create({
   headingText: {
     width: '65%',
     textAlign: 'center',
-    fontSize: moderateScale(18, 0.1),
-    lineHeight: moderateScale(30, 0.1),
+    fontSize: moderateScale(14, 0.1),
+    lineHeight: moderateScale(25, 0.1),
     fontFamily: MonteseratLight,
   },
 
@@ -128,7 +128,7 @@ const s = StyleSheet.create({
     paddingTop: moderateScale(10, 0.1),
     width: '50%',
     textAlign: 'center',
-    fontSize: moderateScale(35, 0.1),
+    fontSize: moderateScale(30, 0.1),
     // lineHeight: moderateScale(30, 0.1),
     fontFamily: MonteseratBold,
   },

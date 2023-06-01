@@ -74,6 +74,10 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(10, 0.1),
   },
   graphView: {
+    width: moderateScale(380, 0.1),
+    height: moderateScale(300, 0.1),
+    // justifyContent: 'center',
+    paddingHorizontal: moderateScale(12, 0.1),
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: moderateScale(100, 0.1),

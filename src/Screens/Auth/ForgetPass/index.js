@@ -49,12 +49,7 @@ const ForgetPass = ({navigation}) => {
         <View>
           <Header navigation={navigation} />
         </View>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignSelf: 'center',
-          }}>
+        <View style={{}}>
           <BlurView
             blurAmount={15}
             blurType="light"
@@ -66,6 +61,7 @@ const ForgetPass = ({navigation}) => {
               borderRadius: moderateScale(25, 0.1),
               alignSelf: 'center',
               justifyContent: 'center',
+              alignItems: 'center',
             }}>
             <LinearGradient
               colors={['rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)']}
