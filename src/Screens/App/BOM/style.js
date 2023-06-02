@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginLeft: moderateScale(10, 0.1),
   },
   headingText1: {
-    fontSize: moderateScale(20, 0.1),
+    fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
   },
   userTitle: {

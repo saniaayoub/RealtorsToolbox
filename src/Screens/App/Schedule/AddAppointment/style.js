@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     paddingLeft: moderateScale(5, 0.1),
-    fontSize: moderateScale(13, 0.1),
+    fontSize: moderateScale(12, 0.1),
     fontFamily: MonteseratLight,
     lineHeight: moderateScale(18, 0.1),
   },

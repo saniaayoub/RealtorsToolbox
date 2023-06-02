@@ -224,7 +224,7 @@ const UserProfile = ({navigation}) => {
           <View style={[s.input]}>
             <Input
               secureTextEntry={showPass}
-              value={'password'}
+              // value={'password'}
               w="100%"
               variant="underlined"
               placeholder={Form.password}
@@ -240,14 +240,12 @@ const UserProfile = ({navigation}) => {
               }
               InputRightElement={
                 <TouchableOpacity
-                  onPress={() => {
-                    setshowPass(!showPass);
-                  }}
-                  style={s.iconCircle}>
-                  <Edit
-                    name={'eye'}
+                  style={s.iconCircle}
+                  onPress={() => setshowPass(!showPass)}>
+                  <Feather
+                    name={showPass ? 'eye' : 'eye-off'}
                     color={textColor}
-                    size={moderateScale(12, 0.1)}
+                    size={13}
                   />
                 </TouchableOpacity>
               }

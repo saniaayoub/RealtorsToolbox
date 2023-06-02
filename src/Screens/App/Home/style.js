@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(10, 0.1),
   },
   btnText1: {
-    fontSize: moderateScale(14, 0.1),
+    fontSize: moderateScale(12, 0.1),
     lineHeight: moderateScale(18, 0.1),
     fontFamily: MonteseratLight,
   },

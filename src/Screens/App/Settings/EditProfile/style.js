@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   headingText: {
     marginTop: moderateScale(10, 0.1),
-    fontSize: moderateScale(20, 0.1),
+    fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
     lineHeight: moderateScale(22, 0.1),
   },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     paddingLeft: moderateScale(5, 0.1),
-    fontSize: moderateScale(13, 0.1),
+    fontSize: moderateScale(12, 0.1),
     fontFamily: MonteseratLight,
     lineHeight: moderateScale(18, 0.1),
   },

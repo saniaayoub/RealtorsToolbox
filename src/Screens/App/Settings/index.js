@@ -194,7 +194,7 @@ const UserSettings = ({navigation}) => {
           <View
             style={{
               marginVertical: moderateScale(25, 0.1),
-              alignSelf: 'flex-end',
+              alignSelf: 'flex-start',
             }}>
             <SwipeButton
               onSwipeSuccess={() => {

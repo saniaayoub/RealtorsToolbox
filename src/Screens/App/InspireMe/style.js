@@ -29,17 +29,12 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20, 0.1),
     fontFamily: MonteseratBold,
   },
+
   backgroundVideo: {
-    // width: '100%',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // height: moderateScale(300, 0.1),
-    // borderRadius: moderateScale(14, 0.1),
     marginVertical: moderateScale(15, 0.1),
     position: 'relative',
     borderRadius: 20,
     overFlow: 'hidden',
-    // zIndex: 0,
   },
   videos: {
     marginBottom: moderateScale(170, 0.1),
@@ -94,7 +89,7 @@ const styles = StyleSheet.create({
     top: moderateScale(22, 0.1),
     width: moderateScale(30, 0.1),
     height: moderateScale(30, 0.1),
-    backgroundColor: '#fff',
+    backgroundColor: '#FDBC2C',
     borderRadius: moderateScale(40 / 2, 0.1),
     alignItems: 'center',
     justifyContent: 'center',

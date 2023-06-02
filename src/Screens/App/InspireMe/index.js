@@ -35,8 +35,11 @@ const InspireMe = ({navigation}) => {
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   const [like, setLike] = useState(false);
   const [video, setVideo] = useState({
-    uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
   });
+  const MonteseratBold = 'Montserrat-Bold';
+  const MonteseratRegular = 'Montserrat-Regular';
+  const MonteseratLight = 'Montserrat-Light';
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
@@ -59,11 +62,9 @@ const InspireMe = ({navigation}) => {
                 <View style={s.backgroundVideo}>
                   <VideoPlayer
                     video={video}
-                    thumbnail={{
-                      uri: 'https://i.picsum.photos/id/866/1600/900.jpg',
-                    }}
+                    thumbnail={require('../../../assets/images/png/videoBack.png')}
                     style={{
-                      backgroundColor: '#000',
+                      // backgroundColor: '#000',
                       borderRadius: moderateScale(14, 0.1),
                     }}
                     resizeMode="cover"
@@ -86,21 +87,33 @@ const InspireMe = ({navigation}) => {
                       name="heart-circle"
                       size={moderateScale(30, 0.1)}
                       color={like == false ? '#FDBC2C' : 'red'}
-                      // solid
-                      // style={s.heartIcon}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    // onPress={() => setLike(!like)}
-                    style={s.share}>
+                  <TouchableOpacity style={s.share}>
                     <Share
                       name="share-square-o"
                       size={moderateScale(20, 0.1)}
-                      color="#FDBC2C"
-                      // solid
-                      // style={s.heartIcon}
+                      color="#fff"
                     />
                   </TouchableOpacity>
+                  <View
+                    style={{
+                      position: 'absolute',
+                      padding: moderateScale(15, 0.1),
+                      top: moderateScale(5, 0.1),
+                    }}>
+                    <Text
+                      style={[
+                        {
+                          color: textColor,
+                          fontSize: moderateScale(15, 0.1),
+                          fontFamily: MonteseratBold,
+                          // textAlign: 'center',
+                        },
+                      ]}>
+                      Your Dream Houses
+                    </Text>
+                  </View>
                 </View>
                 <View>
                   <Text style={[s.caption, {color: textColor}]}>

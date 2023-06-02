@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     paddingLeft: moderateScale(5, 0.1),
-    fontSize: moderateScale(15, 0.1),
+    fontSize: moderateScale(12, 0.1),
     fontFamily: MonteseratLight,
     lineHeight: moderateScale(18, 0.1),
   },

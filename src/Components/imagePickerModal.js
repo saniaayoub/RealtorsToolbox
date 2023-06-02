@@ -72,7 +72,7 @@ const s = StyleSheet.create({
     width: '65%',
     marginBottom: moderateScale(25, 0.1),
     textAlign: 'center',
-    fontSize: moderateScale(20, 0.1),
+    fontSize: moderateScale(18, 0.1),
     lineHeight: moderateScale(30, 0.1),
     fontFamily: MonteseratBold,
   },
@@ -83,7 +83,7 @@ const s = StyleSheet.create({
   },
 
   btnText: {
-    fontSize: moderateScale(20, 0.1),
+    fontSize: moderateScale(18, 0.1),
     lineHeight: moderateScale(24, 0.1),
     fontFamily: MonteseratBold,
     color: '#FDBC2C',

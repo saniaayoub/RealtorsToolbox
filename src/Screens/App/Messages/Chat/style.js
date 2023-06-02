@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
     // paddingTop: moderateScale(20, 0.1),
   },
   sendToContainer: {
-    // borderBottomWidth: moderateScale(0.5, 0.1),
+    borderBottomWidth: moderateScale(0.5, 0.1),
     flexDirection: 'row',
 
     // padding: moderateScale(5, 0.1),
     // paddingLeft: 0,
     // marginVertical: moderateScale(1, 0.1),
     marginBottom: moderateScale(27, 0.1),
+    marginTop: moderateScale(10, 0.1),
   },
   sendToView: {
     marginBottom: moderateScale(5, 0.1),
@@ -196,8 +197,8 @@ const styles = StyleSheet.create({
     margin: moderateScale(15, 0.1),
   },
   circle: {
-    width: moderateScale(37, 0.1),
-    height: moderateScale(37, 0.1),
+    width: moderateScale(35, 0.1),
+    height: moderateScale(35, 0.1),
     borderRadius: moderateScale(37 / 2, 0.1),
     borderColor: '#8F8A8A',
     borderWidth: moderateScale(1, 0.1),
