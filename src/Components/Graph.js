@@ -20,6 +20,7 @@ export default function Graph() {
     <View
       style={{
         marginBottom: 100,
+        // backgroundColor: 'red',
       }}>
       <LineChart
         data={{
@@ -52,7 +53,7 @@ export default function Graph() {
         style={{
           marginVertical: 15,
           borderRadius: 16,
-          marginLeft: -30,
+          marginLeft: -34,
         }}
       />
     </View>

@@ -35,7 +35,7 @@ const InspireMe = ({navigation}) => {
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   const [like, setLike] = useState(false);
   const [video, setVideo] = useState({
-    uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    uri: '',
   });
   const MonteseratBold = 'Montserrat-Bold';
   const MonteseratRegular = 'Montserrat-Regular';
@@ -61,9 +61,13 @@ const InspireMe = ({navigation}) => {
               <View key={i}>
                 <View style={s.backgroundVideo}>
                   <VideoPlayer
-                    video={video}
+                    video={require('../../../assets/video/video.mp4')}
                     thumbnail={require('../../../assets/images/png/videoBack.png')}
+                    endThumbnail={require('../../../assets/images/png/videoBack.png')}
                     style={{
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
                       // backgroundColor: '#000',
                       borderRadius: moderateScale(14, 0.1),
                     }}
@@ -75,13 +79,16 @@ const InspireMe = ({navigation}) => {
                       },
 
                       video: {
-                        display: 'flex',
+                        // display: 'flex',
                         borderRadius: moderateScale(14, 0.1),
                       },
                     }}
                   />
                   <TouchableOpacity
-                    onPress={() => setLike(!like)}
+                    onPress={() => {
+                      console.log(i, 'index');
+                      setLike(!like);
+                    }}
                     style={s.heart}>
                     <Heart
                       name="heart-circle"
