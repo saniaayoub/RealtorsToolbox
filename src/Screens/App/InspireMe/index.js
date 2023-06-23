@@ -1,17 +1,4 @@
-import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  Easing,
-  TouchableOpacity,
-  Animated,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {Button} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -64,13 +51,7 @@ const InspireMe = ({navigation}) => {
                     video={require('../../../assets/video/video.mp4')}
                     thumbnail={require('../../../assets/images/png/videoBack.png')}
                     endThumbnail={require('../../../assets/images/png/videoBack.png')}
-                    style={{
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      // backgroundColor: '#000',
-                      borderRadius: moderateScale(14, 0.1),
-                    }}
+                    style={s.video}
                     resizeMode="cover"
                     customStyles={{
                       controlBar: {
@@ -103,21 +84,8 @@ const InspireMe = ({navigation}) => {
                       color="#fff"
                     />
                   </TouchableOpacity>
-                  <View
-                    style={{
-                      position: 'absolute',
-                      padding: moderateScale(15, 0.1),
-                      top: moderateScale(5, 0.1),
-                    }}>
-                    <Text
-                      style={[
-                        {
-                          color: textColor,
-                          fontSize: moderateScale(15, 0.1),
-                          fontFamily: MonteseratBold,
-                          // textAlign: 'center',
-                        },
-                      ]}>
+                  <View style={s.dhouse}>
+                    <Text style={[s.text, {color: textColor}]}>
                       Your Dream Houses
                     </Text>
                   </View>

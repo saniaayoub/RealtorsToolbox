@@ -1,8 +1,9 @@
-import {SET_USER_TOKEN, SET_THEME, SET_EXIST} from './Constants';
+import {SET_USER_TOKEN, SET_THEME, SET_EXIST, ADD_EVENT} from './Constants';
 
 const initialState = {
   userToken: null,
   theme: 'dark',
+  events: {},
 };
 
 const AppReducer = (state = initialState, action) => {
@@ -21,6 +22,12 @@ const AppReducer = (state = initialState, action) => {
       return {
         ...state,
         exist: action.payload,
+      };
+
+    case ADD_EVENT:
+      return {
+        ...state,
+        events: action.payload,
       };
     default:
       return state;

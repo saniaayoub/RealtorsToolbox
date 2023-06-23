@@ -40,9 +40,16 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(170, 0.1),
   },
   video: {
-    width: '100%',
-    zIndex: 100,
-    height: moderateScale(300, 0.1),
+    bottom: 0,
+    left: 0,
+    right: 0,
+    // backgroundColor: '#000',
+    borderRadius: moderateScale(14, 0.1),
+  },
+  dhouse: {
+    position: 'absolute',
+    padding: moderateScale(15, 0.1),
+    top: moderateScale(5, 0.1),
   },
   caption: {
     fontSize: moderateScale(11, 0.1),

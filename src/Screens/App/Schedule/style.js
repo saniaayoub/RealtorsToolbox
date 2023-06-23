@@ -55,9 +55,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 17,
   },
-  itemText: {
-    color: '#888',
-    fontSize: 16,
+  appText: {
+    fontSize: moderateScale(16, 0.1),
   },
 
   backImg: {

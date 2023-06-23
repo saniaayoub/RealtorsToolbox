@@ -1,25 +1,11 @@
-import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  Easing,
-  TouchableOpacity,
-  Animated,
-  ScrollView,
-  FlatList,
-  Alert,
-} from 'react-native';
+import {Text, View, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
+import {setTheme, setUserToken, addEvent} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import DownArrow from 'react-native-vector-icons/Entypo';
@@ -28,6 +14,8 @@ import PhoneInput from 'react-native-phone-input';
 import DatePicker from 'react-native-date-picker';
 import RadioButton from '../../../../Components/radio';
 import InviteModal from '../../../../Components/invitationModal';
+import moment from 'moment';
+
 const Form = [
   {title: 'First Name'},
   {title: 'Last Name'},
@@ -57,18 +45,20 @@ const Appointment = [
 const AddAppointment = ({navigation}) => {
   const dispatch = useDispatch();
   const phonenum = useRef();
-
+  const events = useSelector(state => state.reducer.events);
   const theme = useSelector(state => state.reducer.theme);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
   const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const [items, setItems] = React.useState({});
   const [borderColor, setBorderColor] = useState('#d3d3d3');
   const [appType, setAppType] = useState(null);
   const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState('');
   const [time, setTime] = useState(new Date());
+  const [selectedTime, setSelectedTime] = useState('');
   const [openDate, setOpenDate] = useState(false);
   const [openTime, setOpenTime] = useState(false);
   const [showInviteModal, setShowInviteModal] = useState(false);
-
   const [gender, setGender] = useState('');
   const [isSelected, setIsSelected] = useState([
     {
@@ -95,6 +85,58 @@ const AddAppointment = ({navigation}) => {
   };
 
   useEffect(() => {}, []);
+
+  const timeToString = time => {
+    const date = new Date(time);
+    return date.toISOString().split('T')[0];
+  };
+
+  const loadItems = day => {
+    setTimeout(() => {
+      for (let i = -15; i < 85; i++) {
+        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+        const strTime = timeToString(time);
+
+        if (!items[strTime]) {
+          items[strTime] = [];
+
+          const numItems = Math.floor(Math.random() * 3 + 1);
+          for (let j = 0; j < numItems; j++) {
+            items[strTime].push({
+              name: 'Item for ' + strTime + ' #' + j,
+              height: Math.max(10, Math.floor(Math.random() * 150)),
+              day: strTime,
+            });
+          }
+        }
+      }
+      const newItems = {};
+      Object.keys(items).forEach(key => {
+        newItems[key] = items[key];
+      });
+      setItems(newItems);
+    }, 1000);
+  };
+
+  const renderItem = item => {
+    return (
+      <TouchableOpacity style={s.item}>
+        <View>
+          <Text>{item.name}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  function formatTimestamp(timestamp) {
+    const now = moment();
+    const date = moment(timestamp);
+    if (now.isSame(date, 'day')) {
+      return date.format('h:mm A');
+    } else {
+      return date.format('DD/mm/yyyy');
+    }
+  }
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
@@ -180,8 +222,9 @@ const AddAppointment = ({navigation}) => {
                     borderWidth={moderateScale(1, 0.1)}
                     borderBottomColor={'#d3d3d3'}
                     backgroundColor={backColor}
-                    top={moderateScale(24, 0.1)}
+                    // top={moderateScale(24, 0.1)}
                     borderColor={textColor}
+                    left={moderateScale(10, 0.1)}
                     trigger={triggerProps => {
                       return (
                         <Pressable
@@ -228,7 +271,7 @@ const AddAppointment = ({navigation}) => {
                     onPressIn={() => setOpenDate(true)}
                     style={[s.inputContainerStyle, s.dateInput]}>
                     <Text style={[s.inputText, {color: textColor}]}>
-                      {date ? date.toDateString() : 'Date'}
+                      {selectedDate ? selectedDate : 'Date'}
                     </Text>
                   </TouchableOpacity>
 
@@ -239,7 +282,10 @@ const AddAppointment = ({navigation}) => {
                     date={date}
                     onConfirm={dateTime => {
                       setOpenDate(false);
-                      setDate(dateTime);
+                      let formatedDate = moment(dateTime).format('YYYY-MM-DD');
+                      console.log(formatedDate, 'formattedDate');
+                      // setDate(formatedDate);
+                      setSelectedDate(formatedDate);
                     }}
                     onCancel={() => {
                       setOpenDate(false);
@@ -254,7 +300,7 @@ const AddAppointment = ({navigation}) => {
                     onPressIn={() => setOpenTime(true)}
                     style={[s.inputContainerStyle, s.dateInput]}>
                     <Text style={[s.inputText, {color: textColor}]}>
-                      {time ? time.toTimeString() : 'Time'}
+                      {selectedTime ? selectedTime : 'Time'}
                     </Text>
                   </TouchableOpacity>
 
@@ -265,7 +311,10 @@ const AddAppointment = ({navigation}) => {
                     date={date}
                     onConfirm={dateTime => {
                       setOpenTime(false);
-                      setTime(dateTime);
+                      // setTime(dateTime);
+                      let formattedTime = formatTimestamp(dateTime);
+                      console.log(formattedTime, 'formattedDate');
+                      setSelectedTime(formattedTime);
                     }}
                     onCancel={() => {
                       setOpenTime(false);
@@ -324,11 +373,28 @@ const AddAppointment = ({navigation}) => {
               );
             }
           })}
+
           <View style={s.btns}>
             <Button
               size="sm"
               onPressIn={async () => {
-                dispatch(setUserToken('sania'));
+                console.log('create');
+                if (selectedDate && selectedTime && appType) {
+                  dispatch(
+                    addEvent({
+                      ...events,
+                      [`${selectedDate}`]: [
+                        {
+                          name: appType,
+                          time: selectedTime,
+                        },
+                      ],
+                    }),
+                  );
+                  navigation.goBack();
+                } else {
+                  Alert.alert('Please select date and time');
+                }
               }}
               variant={'solid'}
               style={s.btn}>
@@ -359,3 +425,13 @@ const AddAppointment = ({navigation}) => {
 };
 
 export default AddAppointment;
+{
+  /* <View style={s.container}>
+<Agenda
+  items={items}
+  loadItemsForMonth={loadItems}
+  selected={'2022-07-07'}
+  renderItem={renderItem}
+/>
+</View> */
+}
