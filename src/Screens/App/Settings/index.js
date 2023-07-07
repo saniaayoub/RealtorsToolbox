@@ -1,24 +1,15 @@
 import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
   Text,
   View,
-  Dimensions,
   Image,
-  Easing,
-  TouchableOpacity,
-  Animated,
-  ScrollView,
-  FlatList,
   Alert,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
-import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
+import {Input} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
-import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Header from '../../../Components/header';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -30,20 +21,43 @@ import moon from '../../../assets/images/png/moon.png';
 import logout from '../../../assets/images/png/LogOut.png';
 import logouticon from '../../../assets/images/png/logouticon.png';
 import SwipeButton from 'rn-swipe-button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AppContext, useAppContext} from '../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../Constants';
+import {postAp, getApi} from '../../../APIs';
+import Loader from '../../../Components/Loader';
 
 const UserSettings = ({navigation}) => {
-  const dispatch = useDispatch();
-  const phonenum = useRef();
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {token, loader, setLoader, theme, setTheme, setToken} =
+    useAppContext(AppContext);
+
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
 
   useEffect(() => {}, []);
+
+  const logoutApi = async () => {
+    setLoader(true);
+    const res = await getApi('logout', token);
+    if (res?.status == true) {
+      clearToken();
+    } else {
+      setLoader(false);
+      Alert.alert(res?.data?.message);
+    }
+  };
+
+  const clearToken = async () => {
+    setToken('');
+    await AsyncStorage.removeItem('userToken');
+    await AsyncStorage.removeItem('password');
+    setLoader(false);
+  };
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
       <Header navigation={navigation} />
-
+      {loader ? <Loader /> : null}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[{backgroundColor: backColor}]}>
@@ -133,7 +147,7 @@ const UserSettings = ({navigation}) => {
               isReadOnly
               w="100%"
               variant="underlined"
-              placeholder={'Resest Password'}
+              placeholder={'Reset Password'}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
@@ -180,9 +194,11 @@ const UserSettings = ({navigation}) => {
               value={theme === 'dark' ? true : false}
               onValueChange={() => {
                 if (theme === 'dark') {
-                  dispatch(setTheme('light'));
+                  AsyncStorage.setItem('theme', 'light');
+                  setTheme('light');
                 } else {
-                  dispatch(setTheme('dark'));
+                  AsyncStorage.setItem('theme', 'dark');
+                  setTheme('dark');
                 }
               }}
               iconColor={{true: '#000', false: '#000'}}
@@ -197,8 +213,8 @@ const UserSettings = ({navigation}) => {
               alignSelf: 'flex-start',
             }}>
             <SwipeButton
-              onSwipeSuccess={() => {
-                dispatch(setUserToken(''));
+              onSwipeSuccess={async () => {
+                logoutApi();
               }}
               thumbIconImageSource={logouticon}
               title="Log out"

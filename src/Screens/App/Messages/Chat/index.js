@@ -9,7 +9,6 @@ import {
   FlatList,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import {moderateScale} from 'react-native-size-matters';
 import s from './style';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -17,8 +16,9 @@ import Inicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
-
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
 import {Input, FormControl, Button} from 'native-base';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
 
 const messages = [
   {
@@ -32,11 +32,9 @@ const messages = [
 ];
 
 const Chat = ({navigation, route}) => {
-  const dispatch = useDispatch();
-
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const uid = 1;
   const [text, setText] = useState('');
 

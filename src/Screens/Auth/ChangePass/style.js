@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(25, 0.1),
     // paddingLeft: moderateScale(15, 0.1),
   },
+  error: {
+    alignSelf: 'flex-start',
+    color: 'red',
+  },
   headingView: {
     marginVertical: moderateScale(50, 0.1),
   },

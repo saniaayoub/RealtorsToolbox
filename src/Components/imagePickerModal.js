@@ -1,19 +1,20 @@
 import {StyleSheet, Text, View, Modal, ActivityIndicator} from 'react-native';
 import React, {useState} from 'react';
-import {Input, Button} from 'native-base';
+import {Button} from 'native-base';
 import {moderateScale} from 'react-native-size-matters';
-import {useDispatch, useSelector} from 'react-redux';
-import Cross from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
 import CameraOpt from './CameraOpt';
+import {AppContext, useAppContext} from '../Context/AppContext';
+import {backDark, backLight, textDark, textLight} from '../Constants';
 
 const MonteseratBold = 'Montserrat-Bold';
 const MonteseratLight = 'Montserrat-Light';
 
-const ImagePicker = ({modalVisible, setModalVisible, screen}) => {
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+const ImagePicker = ({modalVisible, setModalVisible, screen, setFilePath}) => {
+  const {theme} = useAppContext(AppContext);
+
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [submit, setSubmit] = useState(false);
 
   return (
@@ -33,7 +34,10 @@ const ImagePicker = ({modalVisible, setModalVisible, screen}) => {
           <View style={[s.gradientView, {backgroundColor: backColor}]}>
             <Text style={[s.headingText, {color: textColor}]}>{screen}</Text>
 
-            <CameraOpt />
+            <CameraOpt
+              setFilePath={setFilePath}
+              setModalVisible={setModalVisible}
+            />
             <Button
               size="sm"
               onPressIn={async () => {

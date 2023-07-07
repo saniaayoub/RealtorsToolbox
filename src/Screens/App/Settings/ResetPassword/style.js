@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(18, 0.1),
     fontFamily: MonteseratBold,
   },
+  error: {
+    alignSelf: 'flex-start',
+    color: 'red',
+  },
   inputContainer: {
     flexDirection: 'column',
     marginVertical: moderateScale(22, 0.1),

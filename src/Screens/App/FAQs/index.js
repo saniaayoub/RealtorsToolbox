@@ -15,16 +15,16 @@ import {
 } from 'react-native';
 import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
-import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Header from '../../../Components/header';
-
 import Plus from 'react-native-vector-icons/AntDesign';
-
 import Setting from 'react-native-vector-icons/Ionicons';
+import {AppContext, useAppContext} from '../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../Constants';
+
 const NotificationList = [
   {
     faq: `is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen boo`,
@@ -49,10 +49,10 @@ const NotificationList = [
 ];
 
 const FAQs = ({navigation}) => {
-  const dispatch = useDispatch();
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
 
   const [selected, setSelected] = useState([]);
 

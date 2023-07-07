@@ -1,18 +1,9 @@
 import React from 'react';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart,
-} from 'react-native-chart-kit';
+import {LineChart} from 'react-native-chart-kit';
 import {View, Text, Dimensions} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {moderateScale} from 'react-native-size-matters';
-
+import {AppContext, useAppContext} from '../Context/AppContext';
 export default function Graph() {
-  const theme = useSelector(state => state.reducer.theme);
+  const {theme} = useAppContext(AppContext);
   const backColor = theme === 'dark' ? '#232323' : '#fff';
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
 

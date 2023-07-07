@@ -60,6 +60,15 @@ const styles = StyleSheet.create({
   iconCircle: {
     marginRight: moderateScale(15, 0.1),
   },
+  error: {
+    alignSelf: 'flex-start',
+    color: 'red',
+  },
+  pherror: {
+    marginLeft: moderateScale(25, 0.1),
+    marginTop: moderateScale(-20, 0.1),
+    paddingBottom: moderateScale(15, 0.1),
+  },
   heading1: {
     fontFamily: MonteseratBold,
     fontSize: moderateScale(25, 0.1),

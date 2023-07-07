@@ -46,6 +46,12 @@ const styles = StyleSheet.create({
     // backgroundColor: '#000',
     borderRadius: moderateScale(14, 0.1),
   },
+  text:  {
+  
+    fontSize: moderateScale(15, 0.1),
+    fontFamily: MonteseratBold,
+    // textAlign: 'center',
+  },
   dhouse: {
     position: 'absolute',
     padding: moderateScale(15, 0.1),

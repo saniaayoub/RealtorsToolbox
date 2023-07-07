@@ -8,22 +8,45 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-
-const MonteseratBold = 'Montserrat-Bold';
-const MonteseratLight = 'Montserrat-Light';
-
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {moderateScale} from 'react-native-size-matters';
 import Image1 from '../assets/images/png/imagepicker.png';
+import RNFS from 'react-native-fs';
+import {postApi} from '../APIs';
+import {AppContext, useAppContext} from '../Context/AppContext';
 
-const CameraOpt = ({}) => {
+const CameraOpt = ({setFilePath, setModalVisible}) => {
   const [open, setOpen] = useState(false);
+  const {setLoader, token} = useAppContext(AppContext);
 
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const convertToBase64 = async image => {
+    setModalVisible(false);
+    setLoader(true);
+    await RNFS.readFile(image, 'base64')
+      .then(res => {
+        let base64 = `data:image/png;base64,${res}`;
+        getImgUrl(base64, setFilePath);
+      })
+      .catch(err => {
+        console.log(err);
+        setLoader(false);
+      });
+  };
+
+  const getImgUrl = async base64 => {
+    let data = {
+      image: base64,
+    };
+    const res = await postApi('image-upload-64', data, token);
+    const image = res?.data?.image_url;
+    if (image) {
+      setFilePath(image);
+    } else {
+      Alert.alert(res?.data?.message);
+    }
+    setLoader(false);
+  };
 
   const requestExternalReadPermission = async () => {
     if (Platform.OS === 'android') {
@@ -83,10 +106,9 @@ const CameraOpt = ({}) => {
       return false;
     } else return true;
   };
-  const openCamer = async c => {
+
+  const openCamera = async c => {
     let isCameraPermitted = await requestCameraPermission();
-    let isStoragePermitted = await requestExternalWritePermission();
-    let isStorageReadPermitted = await requestExternalReadPermission();
 
     if (c == 'g') {
       launchImageLibrary({
@@ -97,21 +119,15 @@ const CameraOpt = ({}) => {
         saveToPhotos: true,
       })
         .then(image => {
-          if (image.assets) {
-            console.warn(image.assets[0].uri);
+          if (image?.assets) {
+            convertToBase64(image?.assets[0]?.uri);
+            // console.warn(image.assets[0].uri);
           }
         })
         .catch(error => {
           console.log(error);
         });
     } else if (c == 'c') {
-      console.log(
-        'hello camera',
-        isCameraPermitted,
-        isStoragePermitted,
-        isStorageReadPermitted,
-      );
-
       if (isCameraPermitted) {
         launchCamera({
           cropping: true,
@@ -119,8 +135,9 @@ const CameraOpt = ({}) => {
           saveToPhotos: true,
         })
           .then(image => {
-            if (image.assets) {
-              console.warn(image?.assets[0]?.uri);
+            if (image?.assets) {
+              convertToBase64(image?.assets[0]?.uri);
+              // console.warn(image?.assets[0]?.uri);
             }
           })
           .catch(error => {
@@ -136,13 +153,13 @@ const CameraOpt = ({}) => {
           <View style={[s.camerbtn, s.imgBtn]}>
             <TouchableOpacity
               style={s.cameraBtnContainer}
-              onPress={() => openCamer('c')}>
+              onPress={() => openCamera('c')}>
               <FontAwesome5 name={'camera'} size={20} color={'#FDBC2C'} solid />
               <Text style={[s.cameraBtnText, {color: '#fff'}]}>Camera</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={s.cameraBtnContainer}
-              onPress={() => openCamer('g')}>
+              onPress={() => openCamera('g')}>
               <FontAwesome5 name={'image'} size={20} color={'#FDBC2C'} solid />
               <Text style={[s.cameraBtnText, {color: '#fff'}]}>Gallery</Text>
             </TouchableOpacity>
@@ -193,7 +210,7 @@ const s = StyleSheet.create({
   },
   cameraBtnText: {
     fontSize: moderateScale(14, 0.1),
-    fontFamily: MonteseratBold,
+    // fontFamily: MonteseratBold,
     marginLeft: moderateScale(10, 0.1),
   },
 });

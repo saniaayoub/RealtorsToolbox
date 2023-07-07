@@ -15,14 +15,14 @@ import {
 } from 'react-native';
 import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
-import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Header from '../../../Components/header';
 import dummyImg1 from '../../../assets/images/png/dummyImg1.png';
 import dummyImg2 from '../../../assets/images/png/dummyImg2.png';
+import {AppContext, useAppContext} from '../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../Constants';
 
 const NotificationList = [
   {
@@ -70,12 +70,9 @@ const NotificationList = [
 ];
 
 const Notifications = ({navigation}) => {
-  const dispatch = useDispatch();
-
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
-
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   useEffect(() => {}, []);
 
   return (

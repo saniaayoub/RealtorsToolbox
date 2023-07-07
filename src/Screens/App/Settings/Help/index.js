@@ -1,43 +1,16 @@
-import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  Easing,
-  TouchableOpacity,
-  Animated,
-  ScrollView,
-  FlatList,
-  Alert,
-} from 'react-native';
-import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
+import {Text, View, ScrollView} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
-import {moderateScale} from 'react-native-size-matters';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon2 from 'react-native-vector-icons/MaterialIcons';
-import SwitchWithIcons from 'react-native-switch-with-icons';
-import sun from '../../../../assets/images/png/sun.png';
-import moon from '../../../../assets/images/png/moon.png';
-import logout from '../../../../assets/images/png/LogOut.png';
-import logouticon from '../../../../assets/images/png/logouticon.png';
-import SwipeButton from 'rn-swipe-button';
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
 
 const Help = ({navigation}) => {
-  const dispatch = useDispatch();
+  const {theme} = useAppContext(AppContext);
   const phonenum = useRef();
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
-
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   useEffect(() => {}, []);
 
   return (

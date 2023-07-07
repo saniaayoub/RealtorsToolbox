@@ -1,11 +1,9 @@
 import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {Button} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import Header from '../../../Components/header';
-import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Play from 'react-native-vector-icons/FontAwesome5';
 import Heart from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -13,13 +11,13 @@ import Share from 'react-native-vector-icons/FontAwesome';
 import VideoBack from '../../../assets/images/png/videoBack.png';
 import Videomp4 from '../../../assets/video/video.mp4';
 import VideoPlayer from 'react-native-video-player';
-// import Orientation from 'react-native-orientation';
+import {AppContext, useAppContext} from '../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../Constants';
 
 const InspireMe = ({navigation}) => {
-  const dispatch = useDispatch();
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [like, setLike] = useState(false);
   const [video, setVideo] = useState({
     uri: '',

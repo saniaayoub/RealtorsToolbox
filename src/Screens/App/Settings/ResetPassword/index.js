@@ -1,52 +1,89 @@
 import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
   Text,
   View,
-  Dimensions,
-  Image,
-  Easing,
   TouchableOpacity,
-  Animated,
+  Keyboard,
   ScrollView,
-  FlatList,
   Alert,
 } from 'react-native';
-import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
+import {Button, Input} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
-import {moderateScale} from 'react-native-size-matters';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
-import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loader from '../../../../Components/Loader';
+import {postApi} from '../../../../APIs';
 
 const ResetPassword = ({navigation}) => {
-  const dispatch = useDispatch();
+  const {theme, token, loader, setLoader} = useAppContext(AppContext);
 
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPass, setshowPass] = useState(true);
   const [showConfPass, setShowConfPass] = useState(true);
   const [showCurrPass, setShowCurrPass] = useState(true);
+  const [storedPassword, setStorePassword] = useState('');
+  const [onsubmit, setOnSubmit] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
-  const [validate, setValidate] = useState(false);
+  useEffect(() => {
+    getCurrPass();
+  }, []);
 
-  useEffect(() => {}, []);
+  const getCurrPass = async () => {
+    let curPass = await AsyncStorage.getItem('password');
+    setStorePassword(curPass);
+  };
+
+  const validate = () => {
+    Keyboard.dismiss();
+    if (currentPassword === storedPassword) {
+      setIsValid(true);
+    } else if (currentPassword) {
+      Alert.alert('Incorrect Password');
+    } else {
+      return;
+    }
+  };
+
+  const passChange = async () => {
+    setOnSubmit(true);
+    if (!newPassword || !confirmPassword || newPassword !== confirmPassword) {
+      return;
+    }
+
+    setLoader(true);
+    Keyboard.dismiss();
+    const form = {
+      old_password: storedPassword,
+      new_password: newPassword,
+      confirm_password: confirmPassword,
+    };
+    const res = await postApi('change-pass', form, token);
+    console.log(res, 'res');
+    if (res?.status === true) {
+      Alert.alert(res?.message);
+      await AsyncStorage.setItem('password', confirmPassword);
+      navigation.goBack();
+    } else {
+      Alert.alert(res?.data?.message);
+    }
+    setLoader(false);
+  };
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
       <Header navigation={navigation} />
-
+      {loader ? <Loader /> : null}
       <ScrollView
+        keyboardShouldPersistTaps={'always'}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[{backgroundColor: backColor}]}>
         <View style={[s.heading, {borderBottomColor: textColor}]}>
@@ -54,7 +91,7 @@ const ResetPassword = ({navigation}) => {
             Reset Password
           </Text>
         </View>
-        {!validate ? (
+        {!isValid ? (
           <View style={s.inputContainer}>
             <View style={s.input}>
               <Input
@@ -121,6 +158,9 @@ const ResetPassword = ({navigation}) => {
                 style={s.inputText}
                 secureTextEntry={showPass}
               />
+              {onsubmit && !newPassword ? (
+                <Text style={s.error}> * Required</Text>
+              ) : null}
             </View>
             <View style={s.input}>
               <Input
@@ -155,6 +195,11 @@ const ResetPassword = ({navigation}) => {
                 style={s.inputText}
                 secureTextEntry={showConfPass}
               />
+              {onsubmit && !confirmPassword ? (
+                <Text style={s.error}>* Required</Text>
+              ) : confirmPassword && confirmPassword !== newPassword ? (
+                <Text style={s.error}>Password Does not match</Text>
+              ) : null}
             </View>
           </View>
         )}
@@ -162,10 +207,10 @@ const ResetPassword = ({navigation}) => {
           <Button
             size="sm"
             onPressIn={async () => {
-              setValidate(!validate);
-              if (validate) {
-                Alert.alert('Password successfully changed');
-                navigation.navigate('UserSettings');
+              if (!isValid) {
+                validate();
+              } else {
+                passChange();
               }
             }}
             variant={'solid'}

@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     // paddingLeft: moderateScale(15, 0.1),
     justifyContent: 'space-around',
   },
+  error: {
+    alignSelf: 'flex-start',
+    color: 'red',
+  },
   inputView: {
     justifyContent: 'center',
     alignItems: 'center',

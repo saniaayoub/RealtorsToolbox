@@ -1,11 +1,9 @@
 import {Text, View, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken, addEvent} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import DownArrow from 'react-native-vector-icons/Entypo';
@@ -15,6 +13,8 @@ import DatePicker from 'react-native-date-picker';
 import RadioButton from '../../../../Components/radio';
 import InviteModal from '../../../../Components/invitationModal';
 import moment from 'moment';
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
 
 const Form = [
   {title: 'First Name'},
@@ -43,12 +43,10 @@ const Appointment = [
   {id: 'Appointment Type 9'},
 ];
 const AddAppointment = ({navigation}) => {
-  const dispatch = useDispatch();
+  const {theme, events, setEvents} = useAppContext(AppContext);
   const phonenum = useRef();
-  const events = useSelector(state => state.reducer.events);
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [items, setItems] = React.useState({});
   const [borderColor, setBorderColor] = useState('#d3d3d3');
   const [appType, setAppType] = useState(null);
@@ -380,18 +378,16 @@ const AddAppointment = ({navigation}) => {
               onPressIn={async () => {
                 console.log('create');
                 if (selectedDate && selectedTime && appType) {
-                  dispatch(
-                    addEvent({
-                      ...events,
-                      [`${selectedDate}`]: [
-                        {
-                          name: appType,
-                          time: selectedTime,
-                        },
-                      ],
-                    }),
-                  );
-                  navigation.goBack();
+                  setEvents({
+                    ...events,
+                    [`${selectedDate}`]: [
+                      {
+                        name: appType,
+                        time: selectedTime,
+                      },
+                    ],
+                  }),
+                    navigation.goBack();
                 } else {
                   Alert.alert('Please select date and time');
                 }

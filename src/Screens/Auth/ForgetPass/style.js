@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(25, 0.1),
     // paddingLeft: moderateScale(15, 0.1),
   },
+  error: {
+    alignSelf: 'flex-start',
+    color: 'red',
+  },
   inputView: {
     justifyContent: 'center',
     alignItems: 'center',

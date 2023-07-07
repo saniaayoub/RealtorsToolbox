@@ -15,11 +15,10 @@ import {
 } from 'react-native';
 import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
+
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import DownArrow from 'react-native-vector-icons/Entypo';
@@ -28,6 +27,8 @@ import PhoneInput from 'react-native-phone-input';
 import DatePicker from 'react-native-date-picker';
 import RadioButton from '../../../../Components/radio';
 import InviteModal from '../../../../Components/invitationModal';
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
 
 const Form = [
   {title: 'Month', color: ['#FAFF00', '#ffffff']},
@@ -54,12 +55,9 @@ const Month = [
   {month: 'December'},
 ];
 const Monthly = ({navigation}) => {
-  const dispatch = useDispatch();
-
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
-
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [month, setMonth] = useState(null);
   const [showInviteModal, setShowInviteModal] = useState(false);
 

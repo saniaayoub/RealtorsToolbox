@@ -13,6 +13,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: moderateScale(15, 0.1),
   },
+  container: {
+    flex: 1,
+},
+item: {
+    flex: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginRight: 10,
+    marginTop: 17
+},
   heading: {
     justifyContent: 'space-between',
     alignItems: 'center',

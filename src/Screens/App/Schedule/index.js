@@ -1,25 +1,23 @@
 import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {Button} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken, addEvent} from '../../../Redux/actions';
+
 import HeaderTabs from '../../../Components/headerTabs';
 import Header from '../../../Components/header';
 import Plus from 'react-native-vector-icons/AntDesign';
 import {Calendar, LocaleConfig, Agenda} from 'react-native-calendars';
+import {AppContext, useAppContext} from '../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../Constants';
 
 const Schedule = ({navigation}) => {
-  const dispatch = useDispatch();
-  const theme = useSelector(state => state.reducer.theme);
-  const events = useSelector(state => state.reducer.events);
-  const [items, setItems] = useState({});
-  // const [eventArr, setEventArr] = useState({});
+  const {events, theme, setEvents} = useAppContext(AppContext);
 
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : 'white';
+  const [items, setItems] = useState({});
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
 
   useEffect(() => {
     console.log(events, 'eventss');
@@ -107,19 +105,33 @@ const Schedule = ({navigation}) => {
             style={{height: moderateScale(400, 0.1)}}
             // selected="2023-06-05"
             items={events}
-            loadItemsForMonth={loadItems}
+            // loadItemsForMonth={loadItems}
             renderItem={(item, isFirst) => (
               <TouchableOpacity style={s.item}>
-                <Text style={[s.appText, {color: backColor}]}>
+                <Text style={[s.appText, {color: textColor}]}>
                   {item?.name}
                 </Text>
-                <Text style={[s.appText, {color: backColor}]}>
+                <Text style={[s.appText, {color: textColor}]}>
                   {item?.time}
                 </Text>
               </TouchableOpacity>
             )}
             showClosingKnob={true}
+            pastScrollRange={12}
+            futureScrollRange={12}
             theme={{
+              // 'stylesheet.agenda.main': {
+              //   header: {
+              //     width: '100%',
+              //     height: '70%',
+              //   },
+
+              //   weekdays: {
+              //     height: 0,
+              //     width: 0,
+              //   },
+              // },
+              agendaKnobColor: textColor,
               calendarBackground: backColor,
               dayTextColor: textColor,
               textDisabledColor: '#444',

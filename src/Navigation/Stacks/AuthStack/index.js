@@ -1,18 +1,26 @@
 import {createStackNavigator} from '@react-navigation/stack';
-
-import {useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useSelector} from 'react-redux';
 import StartScreen from '../../../Screens/Auth/Start';
 import Login from '../../../Screens/Auth/Login';
 import Register from '../../../Screens/Auth/Register';
 import ForgetPass from '../../../Screens/Auth/ForgetPass';
 import ChangePass from '../../../Screens/Auth/ChangePass';
+import {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
-  const exist = useSelector(state => state.reducer.exist);
+  const [exist, setExist] = useState('');
+
+  useEffect(() => {
+    console.log(exist, exist);
+    checkExisting();
+  }, []);
+
+  const checkExisting = async () => {
+    let temp = await AsyncStorage.getItem('userExist');
+    setExist(temp);
+  };
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>

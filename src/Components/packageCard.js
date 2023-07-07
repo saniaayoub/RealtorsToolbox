@@ -1,18 +1,19 @@
 import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {Button} from 'native-base';
 import Check from 'react-native-vector-icons/Feather';
-import {useDispatch, useSelector} from 'react-redux';
 import {moderateScale} from 'react-native-size-matters';
-import orange from '../assets/images/png/orange.png';
+import {AppContext, useAppContext} from '../Context/AppContext';
+import {backDark, backLight, textDark, textLight} from '../Constants';
+
 const MonteseratBold = 'Montserrat-Bold';
 const MonteseratRegular = 'Montserrat-Regular';
 const MonteseratLight = 'Montserrat-Light';
 
 const PackageCard = props => {
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
+
   return (
     <TouchableOpacity
       style={[s.container, {backgroundColor: textColor}]}

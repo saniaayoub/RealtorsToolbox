@@ -2,17 +2,18 @@ import {StyleSheet, Text, View, Modal, ActivityIndicator} from 'react-native';
 import React, {useState} from 'react';
 import {Input, Button} from 'native-base';
 import {moderateScale} from 'react-native-size-matters';
-import {useDispatch, useSelector} from 'react-redux';
 import Cross from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
+import {AppContext, useAppContext} from '../Context/AppContext';
+import {backDark, backLight, textDark, textLight} from '../Constants';
 
 const MonteseratBold = 'Montserrat-Bold';
 const MonteseratLight = 'Montserrat-Light';
 
 const InviteModal = ({modalVisible, setModalVisible}) => {
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [submit, setSubmit] = useState(false);
 
   return (

@@ -14,11 +14,9 @@ import {
 } from 'react-native';
 import {Button, Input, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import Header from '../../../Components/header';
-import {setTheme, setUserToken} from '../../../Redux/actions';
 import HeaderTabs from '../../../Components/headerTabs';
 import Heart from 'react-native-vector-icons/MaterialCommunityIcons';
 import Share from 'react-native-vector-icons/FontAwesome';
@@ -26,12 +24,13 @@ import Comments from 'react-native-vector-icons/FontAwesome5';
 import Send from 'react-native-vector-icons/MaterialIcons';
 import Book from '../../../assets/images/png/book.png';
 import LinearGradient from 'react-native-linear-gradient';
+import {AppContext, useAppContext} from '../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../Constants';
 
 const BookoftheMonth = ({navigation}) => {
-  const dispatch = useDispatch();
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [isMuted, setIsMuted] = React.useState(false);
 

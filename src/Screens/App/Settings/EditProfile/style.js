@@ -43,7 +43,11 @@ const styles = StyleSheet.create({
     fontFamily: MonteseratLight,
     lineHeight: moderateScale(18, 0.1),
   },
-
+  phone: {
+    borderBottomWidth: 1,
+    paddingBottom: moderateScale(15, 0.1),
+    paddingTop: moderateScale(10, 0.1),
+  },
   icon: {
     marginRight: moderateScale(10, 0.1),
   },

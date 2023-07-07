@@ -1,7 +1,5 @@
 import {Text, View, ScrollView} from 'react-native';
-import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import HeaderTabs from '../../../../Components/headerTabs';
@@ -10,6 +8,8 @@ import PackageCard from '../../../../Components/packageCard';
 import yellow from '../../../../assets/images/png/yellow.png';
 import grey from '../../../../assets/images/png/grey.png';
 import orange from '../../../../assets/images/png/orange.png';
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
 
 const packages = [
   {title: 'Bronze', image: orange, rate: '$200.00'},
@@ -18,11 +18,9 @@ const packages = [
 ];
 
 const PackageStatus = ({navigation}) => {
-  const dispatch = useDispatch();
-
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
 
   useEffect(() => {}, []);
 

@@ -1,14 +1,15 @@
 import {Text, View, ScrollView} from 'react-native';
 import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import DownArrow from 'react-native-vector-icons/Entypo';
+import {useAppContext, AppContext} from '../../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
 
 const Form = [
   {title: 'Year', color: ['#FAFF00', '#ffffff']},
@@ -47,11 +48,10 @@ const Year = [
   {year: '2023'},
 ];
 const Yearly = ({navigation}) => {
-  const dispatch = useDispatch();
+  const {theme} = useAppContext(AppContext);
 
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [year, setYear] = useState(null);
 
   // useEffect(() => {

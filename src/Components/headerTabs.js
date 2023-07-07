@@ -2,15 +2,10 @@ import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Bell from 'react-native-vector-icons/FontAwesome5';
 import Setting from 'react-native-vector-icons/Ionicons';
-import {useDispatch, useSelector} from 'react-redux';
 import {moderateScale} from 'react-native-size-matters';
-import Faq from '../assets/images/svg/Faq.svg';
 import FaqImg from '../assets/images/png/Faq.png';
 
 const HeaderTabs = props => {
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
   return (
     <View style={styles.container}>
       <TouchableOpacity

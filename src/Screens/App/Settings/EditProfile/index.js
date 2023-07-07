@@ -1,57 +1,63 @@
 import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
   Text,
   View,
-  Dimensions,
   Image,
-  Easing,
   TouchableOpacity,
-  Animated,
   ScrollView,
-  FlatList,
   Alert,
+  Keyboard,
 } from 'react-native';
-import {Button, Input, Menu, Pressable, TextArea} from 'native-base';
+import {Button, Input} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import {setTheme, setUserToken} from '../../../../Redux/actions';
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import Edit from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import PhoneInput from 'react-native-phone-input';
 import DatePicker from 'react-native-date-picker';
 import RadioButton from '../../../../Components/radio';
-import InviteModal from '../../../../Components/invitationModal';
-import dummyImg from '../../../../assets/images/png/dummyImg1.png';
+import {postApi} from '../../../../APIs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import ImagePicker from '../../../../Components/imagePickerModal';
 import Feather from 'react-native-vector-icons/Feather';
-// import Icon2 from 'react-native-vector-icons/Fontisto';
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
+import {
+  backDark,
+  textDark,
+  backLight,
+  textLight,
+  dummyImage,
+} from '../../../../Constants';
+import Loader from '../../../../Components/Loader';
+
 const Form = {
-  fullName: 'John Smith',
-  bio: 'My Property My Rules',
-  email: 'example@gmail.com',
-  password: 'password',
-  phNumber: '+123-465-789-00',
-  location: 'USA',
-  gender: 'Male',
+  id: '',
+  first_name: '',
+  about: '',
+  email: '',
+  password: '',
+  address: '',
+  gender: '',
+  user_img: '',
+  phone: '',
+  latitude: '',
+  longitude: '',
 };
 
 const UserProfile = ({navigation}) => {
-  const dispatch = useDispatch();
   const phonenum = useRef();
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme, token, loader, setLoader} = useAppContext(AppContext);
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [borderColor, setBorderColor] = useState('#d3d3d3');
+  const [username, setUsername] = useState('John Smith');
+  const [about, setAbout] = useState('');
+  const [form, setForm] = useState(Form);
+  const [filePath, setFilePath] = useState('');
   const [showPass, setshowPass] = useState(true);
   const [showCamera, setShowCamera] = useState(false);
   const [disable1, setDisable1] = useState(false);
@@ -59,7 +65,6 @@ const UserProfile = ({navigation}) => {
   const [disable3, setDisable3] = useState(false);
   const [disable4, setDisable4] = useState(false);
   const [disable5, setDisable5] = useState(false);
-
   const [isSelected, setIsSelected] = useState([
     {
       id: 1,
@@ -80,17 +85,95 @@ const UserProfile = ({navigation}) => {
         : {...isSelectedItem, selected: false},
     );
     setIsSelected(updatedState);
-
-    console.log(item.name);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // console.log(filePath, 'path');
+    setForm({...form, user_img: filePath});
+  }, [filePath]);
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  const getUserData = async () => {
+    setLoader(true);
+    const res = await postApi('profile', {}, token);
+    if (res?.success) {
+      setUserData(res?.data);
+    }
+    setLoader(false);
+  };
+
+  const setUserData = async data => {
+    for (let item of Object.keys(Form)) {
+      Form[item] = data[item];
+      if (
+        item == 'updated_at' ||
+        item == 'type' ||
+        item == 'created_at' ||
+        item == 'otp' ||
+        item == 'email_verified_at' ||
+        item == 'code' ||
+        item == 'status'
+      ) {
+        console.log('do nothing');
+      }
+      if (item == 'gender') {
+        let updatedState = isSelected.map(isSelectedItem =>
+          isSelectedItem.name == data[item]
+            ? {...isSelectedItem, selected: true}
+            : {...isSelectedItem, selected: false},
+        );
+        setIsSelected(updatedState);
+      } else {
+        Form[item] = data[item];
+      }
+    }
+    console.log(Form, 'user data');
+    setForm(Form);
+    setAbout(Form?.about);
+    setUsername(Form?.first_name);
+  };
+
+  const updateUserData = async () => {
+    Keyboard.dismiss();
+    setLoader(true);
+    // console.log(form, 'form');
+    const res = await postApi('user-update', form, token);
+    // console.log(res, 'return');
+    if (res?.success) {
+      Alert.alert(res?.messsage);
+      setAbout(form?.about);
+      setUsername(form?.first_name);
+    } else {
+      Alert.alert(res?.data?.message);
+    }
+    setLoader(false);
+  };
+
+  const EditIcon = ({setDisable, disable}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          setDisable(!disable);
+        }}
+        style={s.iconCircle}>
+        <Edit
+          name={'account-edit'}
+          color={textColor}
+          size={moderateScale(20, 0.1)}
+        />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={[s.mainContainer, {backgroundColor: backColor}]}>
+      {loader ? <Loader /> : null}
       <Header navigation={navigation} />
-
       <ScrollView
+        keyboardShouldPersistTaps={'always'}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[{backgroundColor: backColor}]}>
         <View style={s.tabs}>
@@ -98,8 +181,11 @@ const UserProfile = ({navigation}) => {
         </View>
         <View style={[s.heading, {borderBottomColor: textColor}]}>
           <View style={[s.dp]}>
-            <Image source={dummyImg} style={s.dp} resizeMode={'cover'} />
-
+            <Image
+              source={{uri: form?.user_img ? form?.user_img : dummyImage}}
+              style={s.dp}
+              resizeMode={'cover'}
+            />
             <TouchableOpacity
               style={[
                 s.iconCircle,
@@ -115,10 +201,8 @@ const UserProfile = ({navigation}) => {
               />
             </TouchableOpacity>
           </View>
-          <Text style={[s.headingText, {color: textColor}]}>John Smith</Text>
-          <Text style={[s.textRegular, {color: textColor}]}>
-            My Property My Rules
-          </Text>
+          <Text style={[s.headingText, {color: textColor}]}>{username}</Text>
+          <Text style={[s.textRegular, {color: textColor}]}>{about}</Text>
         </View>
         <View style={s.inputContainer}>
           <View style={[s.input]}>
@@ -127,7 +211,11 @@ const UserProfile = ({navigation}) => {
               isReadOnly={!disable1}
               isFocused={disable1}
               variant="underlined"
-              placeholder={Form.fullName}
+              value={form?.first_name}
+              placeholder={'Full Name'}
+              onChangeText={text => {
+                setForm({...form, first_name: text});
+              }}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
@@ -139,17 +227,7 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity
-                  onPress={() => {
-                    setDisable1(!disable1);
-                  }}
-                  style={s.iconCircle}>
-                  <Edit
-                    name={'account-edit'}
-                    color={textColor}
-                    size={moderateScale(20, 0.1)}
-                  />
-                </TouchableOpacity>
+                <EditIcon setDisable={setDisable1} disable={disable1} />
               }
               style={[s.inputText, {color: textColor}]}
             />
@@ -161,7 +239,11 @@ const UserProfile = ({navigation}) => {
               isReadOnly={!disable2}
               isFocused={disable2}
               variant="underlined"
-              placeholder={Form.bio}
+              value={form.about}
+              placeholder={'About me'}
+              onChangeText={text => {
+                setForm({...form, about: text});
+              }}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
@@ -173,17 +255,7 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity
-                  onPress={() => {
-                    setDisable2(!disable2);
-                  }}
-                  style={s.iconCircle}>
-                  <Edit
-                    name={'account-edit'}
-                    color={textColor}
-                    size={moderateScale(20, 0.1)}
-                  />
-                </TouchableOpacity>
+                <EditIcon setDisable={setDisable2} disable={disable2} />
               }
               style={[s.inputText, {color: textColor}]}
             />
@@ -191,10 +263,12 @@ const UserProfile = ({navigation}) => {
           <View style={[s.input]}>
             <Input
               w="100%"
-              isReadOnly={!disable3}
-              isFocused={disable3}
+              isDisabled
+              isReadOnly={true}
+              // isFocused={disable3}
               variant="underlined"
-              placeholder={Form.email}
+              value={form.email}
+              placeholder={'Email'}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
@@ -206,28 +280,18 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity
-                  onPress={() => {
-                    setDisable3(!disable3);
-                  }}
-                  style={s.iconCircle}>
-                  <Edit
-                    name={'account-edit'}
-                    color={textColor}
-                    size={moderateScale(20, 0.1)}
-                  />
-                </TouchableOpacity>
+                <EditIcon setDisable={setDisable3} disable={disable3} />
               }
               style={[s.inputText, {color: textColor}]}
             />
           </View>
-          <View style={[s.input]}>
+          {/* <View style={[s.input]}>
             <Input
               secureTextEntry={showPass}
-              // value={'password'}
+              value={'password'}
               w="100%"
               variant="underlined"
-              placeholder={Form.password}
+              placeholder={'Password'}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
@@ -251,62 +315,7 @@ const UserProfile = ({navigation}) => {
               }
               style={[s.inputText, {color: textColor}]}
             />
-          </View>
-          <View
-            style={[
-              s.input,
-              {
-                borderBottomWidth: 1,
-                paddingBottom: moderateScale(15, 0.1),
-                paddingTop: moderateScale(10, 0.1),
-                borderBottomColor: borderColor,
-              },
-            ]}>
-            <PhoneInput
-              disabled={!disable4}
-              initialCountry={'us'}
-              initialValue="+123-465-789-00"
-              textProps={{
-                placeholder: 'Enter Phone Number',
-                placeholderTextColor: textColor,
-              }}
-              autoFormat={true}
-              pickerBackgroundColor={'#d3d3d3'}
-              textStyle={[s.inputStyle, {color: textColor}]}
-              isValidNumber={e => console.log(e, 'here')}
-              ref={phonenum}
-              onChangePhoneNumber={phNumber => {
-                if (phonenum.current.isValidNumber()) {
-                  setBorderColor('#d3d3d3');
-                } else {
-                  setBorderColor('red');
-                }
-              }}
-            />
-            <TouchableOpacity
-              style={[
-                s.iconCircle,
-                {
-                  position: 'absolute',
-                  right: 0,
-                  top: moderateScale(10, 0.1),
-                },
-              ]}
-              onPress={() => {
-                setDisable4(!disable4);
-                if (!disable4) {
-                  setBorderColor('#33A9C4');
-                } else {
-                  setBorderColor('#D3D3D3');
-                }
-              }}>
-              <Edit
-                name={'account-edit'}
-                color={textColor}
-                size={moderateScale(20, 0.1)}
-              />
-            </TouchableOpacity>
-          </View>
+          </View> */}
 
           <View style={[s.input]}>
             <Input
@@ -314,7 +323,11 @@ const UserProfile = ({navigation}) => {
               isReadOnly={!disable5}
               isFocused={disable5}
               variant="underlined"
-              placeholder={Form.location}
+              value={form?.address}
+              onChangeText={text => {
+                setForm({...form, address: text});
+              }}
+              placeholder={'Address'}
               placeholderTextColor={textColor}
               InputLeftElement={
                 <View style={s.icon}>
@@ -326,21 +339,67 @@ const UserProfile = ({navigation}) => {
                 </View>
               }
               InputRightElement={
-                <TouchableOpacity
-                  onPress={() => {
-                    setDisable5(!disable5);
-                  }}
-                  style={s.iconCircle}>
-                  <Edit
-                    name={'account-edit'}
-                    color={textColor}
-                    size={moderateScale(20, 0.1)}
-                  />
-                </TouchableOpacity>
+                <EditIcon setDisable={setDisable5} disable={disable5} />
               }
               style={[s.inputText, {color: textColor}]}
             />
           </View>
+          {form?.phone ? (
+            <View
+              style={[
+                s.input,
+                s.phone,
+                {
+                  borderBottomColor: borderColor,
+                },
+              ]}>
+              <PhoneInput
+                disabled={!disable4}
+                initialCountry={'us'}
+                initialValue={form?.phone}
+                textProps={{
+                  placeholder: 'Enter* Phone Number',
+                  placeholderTextColor: textColor,
+                }}
+                autoFormat={true}
+                pickerBackgroundColor={'#d3d3d3'}
+                textStyle={[s.inputStyle, {color: textColor}]}
+                isValidNumber={e => console.log(e, 'here')}
+                ref={phonenum}
+                onChangePhoneNumber={phNumber => {
+                  setForm({...form, phone: phonenum.current.getValue()});
+                  if (phonenum.current.isValidNumber()) {
+                    setBorderColor('#d3d3d3');
+                  } else {
+                    setBorderColor('red');
+                  }
+                }}
+              />
+              <TouchableOpacity
+                style={[
+                  s.iconCircle,
+                  {
+                    position: 'absolute',
+                    right: 0,
+                    top: moderateScale(10, 0.1),
+                  },
+                ]}
+                onPress={() => {
+                  setDisable4(!disable4);
+                  if (!disable4) {
+                    setBorderColor('#33A9C4');
+                  } else {
+                    setBorderColor('#D3D3D3');
+                  }
+                }}>
+                <Edit
+                  name={'account-edit'}
+                  color={textColor}
+                  size={moderateScale(20, 0.1)}
+                />
+              </TouchableOpacity>
+            </View>
+          ) : null}
           <View style={s.radioInput}>
             <Text
               style={[
@@ -350,7 +409,7 @@ const UserProfile = ({navigation}) => {
               Gender
             </Text>
             {isSelected.map((item, i) => (
-              <View style={s.radio}>
+              <View key={i} style={s.radio}>
                 <RadioButton
                   onPress={() => onRadioBtnClick(item)}
                   selected={item.selected}
@@ -364,18 +423,19 @@ const UserProfile = ({navigation}) => {
             <Button
               size="sm"
               onPressIn={async () => {
-                Alert.alert('Information Updated');
+                updateUserData();
               }}
               variant={'solid'}
               style={s.btn}>
               <Text style={s.btnText}>Save</Text>
             </Button>
           </View>
-
           <ImagePicker
             modalVisible={showCamera}
             setModalVisible={setShowCamera}
             screen={'Update Profile'}
+            setFilePath={setFilePath}
+            setLoader={setLoader}
           />
         </View>
       </ScrollView>

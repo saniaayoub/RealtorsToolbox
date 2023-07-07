@@ -1,22 +1,24 @@
 import {Text, View, Image, ScrollView} from 'react-native';
 import {Button} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+
 import s from './style';
 import {moderateScale} from 'react-native-size-matters';
-import {setTheme} from '../../../../Redux/actions';
+
 import HeaderTabs from '../../../../Components/headerTabs';
 import Header from '../../../../Components/header';
 import HomeImg from '../../../../assets/images/png/homeImg.png';
 import Graph from '../../../../Components/Graph';
 import Plus from 'react-native-vector-icons/AntDesign';
 import ImagePicker from '../../../../Components/imagePickerModal';
+import {AppContext, useAppContext} from '../../../../Context/AppContext';
+import {backDark, textDark, backLight, textLight} from '../../../../Constants';
 
 const MyWhy = ({navigation}) => {
-  const dispatch = useDispatch();
-  const theme = useSelector(state => state.reducer.theme);
-  const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
+  const {theme} = useAppContext(AppContext);
+
+  const textColor = theme === 'dark' ? textLight : textDark;
+  const backColor = theme === 'dark' ? backDark : backLight;
   const [showCamera, setShowCamera] = useState(false);
   useEffect(() => {}, []);
 

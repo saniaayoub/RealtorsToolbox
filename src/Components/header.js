@@ -1,25 +1,28 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
-import {useSelector} from 'react-redux';
-
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {moderateScale} from 'react-native-size-matters';
+
+import {AppContext, useAppContext} from '../Context/AppContext';
+
 const Header = props => {
-  const theme = useSelector(state => state.reducer.theme);
+  const {token, theme, setToken} = useAppContext(AppContext);
+  const [loader, setLoader] = useState(true);
   const textColor = theme === 'dark' ? '#fff' : '#3F3E3E';
-  const backColor = theme === 'dark' ? '#232323' : '#fff';
-  const userToken = useSelector(state => state.reducer.userToken);
 
   return (
     <TouchableOpacity
       onPress={() => {
         props.navigation.goBack();
       }}
-      style={{marginVertical: moderateScale(25, 0.1)}}>
+      style={{
+        width: moderateScale(30, 0.1),
+        marginVertical: moderateScale(25, 0.1),
+      }}>
       <Icon
         name="leftcircle"
         size={moderateScale(30, 0.1)}
-        color={userToken ? textColor : '#fff'}
+        color={token ? textColor : '#fff'}
         solid
       />
     </TouchableOpacity>
